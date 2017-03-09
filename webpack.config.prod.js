@@ -6,7 +6,6 @@ const CompressionPlugin = require('compression-webpack-plugin')
 
 
 module.exports = {
-  devtool: 'source-map',
 
   entry: [
     './src/dev/js/index'
@@ -21,12 +20,13 @@ module.exports = {
   resolve: {
     modules: ["node_modules"],
     alias: {
-      IMG: path.join(__dirname, 'src/assets/img'),
-      FONT: path.join(__dirname, 'src/assets/font'),
-      SASS: path.join(__dirname, 'src/dev/sass'),
-      PRELOAD: path.join(__dirname, 'src/dev/js/Preload'),
-      STORE: path.join(__dirname, 'src/dev/js/Store'),
-    }
+      'DATA$': path.resolve(__dirname, 'src/data'),
+      'IMG': path.resolve(__dirname, 'src/assets/img'),
+      'FONT': path.resolve(__dirname, 'src/assets/font'),
+      'SASS$': path.resolve(__dirname, 'src/dev/sass/main'),
+      'APP': path.resolve(__dirname, 'src/dev/js/App')
+    },
+    extensions:['.scss','.json','.js','.jsx']
   },
 
 
@@ -65,7 +65,7 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.(jpe?g|png|svg)$/,
+        test: /\.(jpe?g|png|svg|gif)$/,
         loader: 'file-loader?name=./img/[name]-[hash:6].[ext]',
         include: path.join(__dirname, './src/assets/img')
       },

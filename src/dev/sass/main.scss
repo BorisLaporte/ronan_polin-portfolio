@@ -2,10 +2,12 @@
 @import 'config/_colors.scss';
 @import 'config/_font.scss';
 
+@import 'common/_structure.scss';
+@import 'common/_style.scss';
+
 @import 'font-awesome/font-awesome.scss';
 
-// @import 'parts/....scss'
-
-div{
-	box-sizing: border-box;
-}
+@import 'parts/menu.scss';
+@import 'parts/home.scss';
+@import 'parts/about.scss';
+@import 'parts/project.scss';

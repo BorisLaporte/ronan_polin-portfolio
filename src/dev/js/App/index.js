@@ -1,24 +1,81 @@
 import React, {Component, PropTypes} from 'react'
-import {Provider} from 'react-redux'
-import { Router, Route, browserHistory } from 'react-router'
+import {connect} from 'react-redux'
+import PreloadReact from './Preload'
+import {fillContent} from './Store/content/actions'
 
-import configureStore from 'STORE'
-// import 'IMG/cafe.jpg'
+import Menu from './Menu'
+import json from 'SRC/data.json'
 
-const store = configureStore()
+class App extends Component {
+	constructor(props){
+		super(props)
 
-export default class App extends Component {
+		this.state = {
+			ready: false
+		}
+
+		this.letsGo = this.letsGo.bind(this)
+	}
+
+	componentWillMount() {
+  }
+
+	componentDidMount() {
+		this.fillJson(json)
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+
+	}
+
+	letsGo(){
+		this.setState({ready: true})
+	}
+
+	fillJson(json){
+		const {dispatch} = this.props
+		if (typeof json === "object" ){
+			dispatch(fillContent(json))
+		} else if ( typeof json === "string" ){
+			dispatch(fillContent(JSON.parse(json)))
+		}
+	}
+
   render() {
+		const {ready} = this.state
+		const {children, data, color} = this.props
     return (
-      <Provider store={store}>
-        <Router history={browserHistory}>
-					<Route path="/" component={<div></div>} />
-				</Router>
-      </Provider>
+      <div className={"wrapper "+color}>
+				<PreloadReact 
+					data={data}
+					children={children}
+					onSuccess={this.letsGo}
+        />
+        { ready && <Menu /> }
+      </div>
     )
   }
 }
 
-App.propTypes = {
-  store: PropTypes.object.isRequired,
+
+
+function mapStateToProps(state) {
+  const { contentReducer} = state
+  const { colorReducer} = state
+
+  const {
+    items: data
+  } = contentReducer
+
+  const {
+    color: color
+  } = colorReducer
+
+  return {
+    data,
+    color
+  }
 }
+
+
+export default connect(mapStateToProps)(App)

@@ -1,0 +1,190 @@
+#about{
+
+	&.sub-wrapper{
+		overflow-x: hidden;
+		width: 100%;
+		position: absolute;
+		height: 100%;
+		top: 0;
+		left: 0;
+
+		.background{
+			position: absolute;
+			display: block;
+			bottom: 0;
+			left: 0;
+			height: 80%;
+			width: auto;
+			z-index: -100;
+
+			@media screen and (max-width: 800px) {
+				transform: translateX(-35%)
+			}
+		}
+		.content{
+			width: 100%;
+			max-width: 570px;
+			position: absolute;
+			display: inline-block;
+			top: 50%;
+			left: 45%;
+			transform: translateY(-50%);
+
+			@media screen and (max-width: 1200px) {
+				left: initial;
+				right: 130px;
+			}
+
+			@media screen and (max-width: 800px) {
+				right: initial;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				max-width: 100%;
+				padding: 0 120px;
+			}
+			@media screen and (max-width: 600px) {
+				padding: 0 20%;
+			}
+			@media screen and (max-width: 450px) {
+				padding: 0 10%;
+			}
+
+			.main{
+				
+				.title{
+					font-size: 4em;
+					letter-spacing: 7.2px;
+					font-family: $linoBlack;
+					text-align: center;
+					@media screen and (max-width: 1200px) {
+						font-size: 3em;
+					}
+
+				}
+				.links{
+					display: inline-block;
+					position: relative;
+					left: 50%;
+					transform: translateX(-50%);
+
+					a{
+						display: inline-block;
+						padding: 10px 5px;
+						margin: 15px 8px;
+						font-size: 1.2em;
+						letter-spacing: 1.8px;
+						line-height: 1.33;
+						text-decoration: underline;
+						@media screen and (max-width: 600px) {
+							padding: 5px 2px;
+							margin: 5px 3px;
+						}
+					}
+				}
+			}
+			.details{
+				position: relative;
+				margin-top: 40px;
+				width: 100%;
+				max-width: 510px;
+				@media screen and (max-width: 800px) {
+					left: 50%;
+					transform: translateX(-50%);
+					margin-top: 20px;
+				}
+				@media screen and (max-width: 600px) {
+					margin-bottom: 10px;
+				}
+
+				div{
+					position: relative;
+					line-height: 1.5;
+					letter-spacing: 1.6px;
+				}
+				.hi{
+					font-family: $sabonItalic;
+					font-weight: bold;
+					left: 0;
+					margin-bottom: 30px;
+					@media screen and (max-width: 800px) {
+						left: initial;
+						margin-bottom: 20px;
+					}
+					@media screen and (max-width: 600px) {
+						margin-bottom: 10px;
+					}
+				}
+				.who-am-i{
+					max-width: 400px;
+					left: 55px;
+					margin-bottom: 30px;
+					@media screen and (max-width: 800px) {
+						left: initial;
+						margin-bottom: 20px;
+						max-width: initial;
+					}
+					@media screen and (max-width: 600px) {
+						margin-bottom: 10px;
+					}
+
+					.school{
+						text-decoration: underline;
+					}
+				}
+				.internship{
+					max-width: 390px;
+					left: 140px;
+					margin-bottom: 35px;
+					@media screen and (max-width: 800px) {
+						left: initial;
+						max-width: initial;
+					}
+					@media screen and (max-width: 600px) {
+						margin-bottom: 20px;
+					}
+				}
+				.contact{
+					text-align: right;
+					right: 0;
+					display: block;
+					@media screen and (max-width: 800px) {
+						right: initial;
+					}
+				}
+				.mail{
+					margin-bottom: 65px;
+					@media screen and (max-width: 800px) {
+					}
+					@media screen and (max-width: 600px) {
+						margin-bottom: 40px;
+					}
+
+					a{
+						display: inline-block;
+						right: -5px;
+						position: absolute;
+						line-height: 1.5;
+						text-align: right;
+						padding: 0 5px;
+						letter-spacing: 1.6px;
+					}
+				}
+				.super-awesome-dev{
+					text-align: right;
+					right: 0;
+					font-size: 0.8em;
+					opacity: 0.33;
+					@media screen and (max-width: 800px) {
+						right: initial;
+						font-size: 1em;
+					}
+
+				}
+			}
+		}
+
+	}
+
+	
+}

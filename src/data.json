@@ -1,0 +1,87 @@
+{
+	"home": {
+		"firstName": "ronan",
+		"lastName": "polin",
+		"date": "- portfolio 2017",
+		"student": "student at hetic ",
+		"freelance": "& freelance ux|ui designer"
+	},
+	"about": {
+		"title": ".about",
+		"background": "pictures/about.jpg",
+		"links": [
+			{
+				"name": "dribble",
+				"url": "#"
+			},
+			{
+				"name": "behance",
+				"url": "#"
+			},
+			{
+				"name": "linkedin",
+				"url": "#"
+			}
+		],
+		"details": {
+			"hi": "hello !",
+			"whoAmI": "I’m ronan, a student based in Paris in 4th years at ",
+			"school": {
+				"name": "hetic",
+				"url": "https://www.hetic.net/"
+			},
+			"doingWhat": " working also as ux|ui freelancer.",
+			"internship": "In order to be a product designer, i’m looking for an internship in interface design (ux|ui) and ergonomics from july to december all over the world!",
+			"contact": "internship? freelance? or just a hi?",
+			"mail": "ronan.polin@gmail.com",
+			"developedBy": "developped by ",
+			"superAwesomeDev": {
+				"name": "Boris Laporte",
+				"url": "http://borislaporte.com"
+			}
+		}
+	},
+	"projects":[
+		"reetags",
+		"phoenix",
+		"lipsty"
+	],
+	"details":{
+		"reetags":{
+			"title":"reetags",
+			"color": "white",
+			"square": "top",
+			"intro": {
+				"part1": "a social platform ",
+				"part2": "& marketplace in fashion"
+			},
+			"next": "phoenix",
+			"index": 0,
+			"thumbnail": "pictures/reetags.jpg"
+		},
+		"phoenix":{
+			"title":"phoenix",
+			"color": "black",
+			"square": "middle",
+			"intro": {
+				"part1": "a medical help ",
+				"part2": "against addiction"
+			},
+			"next": "lipsty",
+			"index": 1,
+			"thumbnail": "pictures/phoenix.jpg"
+		},
+		"lipsty":{
+			"title":"lipsty",
+			"color": "white",
+			"square": "bottom",
+			"intro": {
+				"part1": "cocktail & flirt, ",
+				"part2": "what a perfect match"
+			},
+			"next": "reetags",
+			"index": 2,
+			"thumbnail": "pictures/lipsty.jpg"
+		}
+	}
+}

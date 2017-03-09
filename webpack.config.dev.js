@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+
 module.exports = {
   devtool: 'cheap-eval-source-map',
 
@@ -14,7 +15,8 @@ module.exports = {
   
   output: {
     path: path.join(__dirname, './build'),
-    filename: '[name]-[hash].js',
+    filename: '[name]-dev.js',
+    publicPath: '/'
   },
 
   devServer: {
@@ -27,12 +29,12 @@ module.exports = {
   resolve: {
     modules: ["node_modules"],
     alias: {
-      IMG: path.join(__dirname, 'src/assets/img'),
-      FONT: path.join(__dirname, 'src/assets/font'),
-      SASS: path.join(__dirname, 'src/dev/sass'),
-      PRELOAD: path.join(__dirname, 'src/dev/js/Preload'),
-      STORE: path.join(__dirname, 'src/dev/js/Store'),
-    }
+      'SRC': path.resolve(__dirname, 'src/'),
+      'IMG': path.resolve(__dirname, 'src/assets/img'),
+      'FONT': path.resolve(__dirname, 'src/assets/font'),
+      'SASS': path.resolve(__dirname, 'src/dev/sass'),
+      'APP': path.resolve(__dirname, 'src/dev/js/App')
+    },
   },
 
   plugins: [
@@ -62,8 +64,8 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.(jpe?g|png|svg)$/,
-        loader: 'file-loader?name=./img/[name]-[hash:6].[ext]',
+        test: /\.(jpe?g|png|svg|gif)$/,
+        loader: 'file-loader?name=./img/[name].[ext]',
         include: path.join(__dirname, './src/assets/img')
       },
       {
