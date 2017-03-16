@@ -11,7 +11,6 @@ class Projects extends Component {
 		this.state = {
       tl: null,
       prefix: '/projects/',
-      reg: /^\/projects/,
       forceActive: false
 		}
 	}
@@ -35,22 +34,36 @@ class Projects extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    const {reg} = this.state
-    if ( nextProps.isRouting && reg.test(nextProps.reduxNextRoute) ){
+    if ( nextProps.isRouting && nextProps.nextKind == "projects" ){
       const name = nextProps.reduxNextRoute.substring(nextProps.reduxNextRoute.lastIndexOf("/") + 1)
       this.state.forceActive = name
     } else if ( !nextProps.isRouting ){
       this.state.forceActive = false
+    } else if ( nextProps.isRouting && nextProps.nextKind == "detail"){
+      this.leavingAnim()
     }
   }
   
   enteringAnim(){
-		const {tl} = this.state
+    const {tl} = this.state
     const {container} = this.refs
+    tl.clear()
     tl.from(container, 1,
     {
       opacity: 0,
       y:10,
+      ease: Power2.easeOut
+    })
+  }
+
+  leavingAnim(){
+		const {tl} = this.state
+    const {container} = this.refs
+    tl.clear()
+    tl.to(container, 1,
+    {
+      opacity: 0,
+      y:-10,
       ease: Power2.easeOut
     })
   }
@@ -61,8 +74,8 @@ class Projects extends Component {
     const {name} = this.props.params
     const toCompare = !forceActive ? name : forceActive
 		return (
-			<div className="link projects" ref="container" >
-        <div className="title">.projects</div>
+			<div className="link center" ref="container" >
+        <div className="label">.projects</div>
         <div className="chinese-list">
           {projects.map(function(_project, i){
             const active = (toCompare == _project) ? 'active' : ''
@@ -88,16 +101,18 @@ function mapStateToProps(state) {
   } = contentReducer
 
   const {
-    route: reduxRoute,
     nextRoute: reduxNextRoute,
-    isRouting: isRouting
+    isRouting: isRouting,
+    nextRouteKind: nextKind,
+    routeKind: kind
   } = navigationReducer
 
   return {
     data,
-    reduxRoute,
     reduxNextRoute,
-    isRouting
+    isRouting,
+    kind,
+    nextKind
   }
 }
 

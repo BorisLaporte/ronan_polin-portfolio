@@ -1,18 +1,30 @@
 import React, { Component, PropTypes } from 'react'
-import {Link} from 'react-router'
+import {browserHistory} from 'react-router'
 
 export default class ChineseNumber extends Component {
+	constructor(props){
+		super(props)
+
+		this.handleClick = this.handleClick.bind(this)
+	}
+	handleClick(e){
+		const {link} = this.props
+		e.preventDefault()
+		browserHistory.push(link)
+	}
+
 	render() {
 		const {number, link, active} = this.props
 		return (
-			<Link
-        to={link} 
+			<a
+        href="#" 
         className={"chinese-number n-"+number+" "+active}
+        onClick={this.handleClick}
       >
 				{(number >= 0) && <div className="chinese-string" ></div>}
 				{(number >= 1) && <div className="chinese-string" ></div>}
 				{(number >= 2) && <div className="chinese-string" ></div>}
-      </Link>
+      </a>
 		)
 	}
 }

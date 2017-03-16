@@ -77,18 +77,19 @@ class Home extends Component {
 	render() {
 		const {firstName, lastName, date, student, freelance} = this.props.data.home
 		return (
-			<div id="home" className="sub-wrapper center" ref="home" >
-				<div className="main">
+			<div id="home" className="sub-wrapper in-middle" ref="home" >
+				<div className="main center">
 					<div className="name shadowy">
 						<div className="first-name">{firstName}</div>
 						<div className="last-name">{lastName}</div>
 					</div>
 					<div className="date">{date}</div>
 				</div>
-				<div className="intro">
-					<span className="student">{student}</span>
-					<span className="freelance">{freelance}</span>
-					<div className="intro-hover"></div>
+				<div className="intro center">
+					<div className="content" >
+						<span className="line">{student}</span>
+						<span className="line">{freelance}</span>
+					</div>
 				</div>
 			</div>
 		)

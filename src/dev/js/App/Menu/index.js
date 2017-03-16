@@ -1,46 +1,33 @@
 import React, { Component, PropTypes } from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
 
 import Top from './Top'
 import Bottom from './Bottom'
 
 class Menu extends Component {
-	constructor(props){
-		super(props)
-
-		this.state = {
-			reg: {
-				home: /^\/home$/,
-				about: /^\/about$/,
-				projects: /^\/projects/,
-				detail: /detail$/
-			}
-		}
-	}
-
-	componentDidMount() {
-		// setTimeout(function() {
-		// 	browserHistory.push('/')
-		// }, 3000)
-		// console.log(this.props)
-
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-
-	}
-
-
 	render() {
-		const {reg} = this.state
+		const {color} = this.props
 		return (
-			<div id="menu" >
-				<Top reg={reg}/>
-				<Bottom reg={reg}/>
+			<div id="menu" className={color} >
+				<Top/>
+				<Bottom/>
 			</div>
 		)
 	}
 }
 
-export default withRouter(Menu)
+
+function mapStateToProps(state) {
+  const { colorReducer} = state
+
+  const {
+    color: color
+  } = colorReducer
+
+  return {
+    color
+  }
+}
+
+
+export default connect(mapStateToProps)(Menu)

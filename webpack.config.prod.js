@@ -15,18 +15,18 @@ module.exports = {
   output: {
     path: path.join(__dirname, './build'),
     filename: '[name]-[hash].js',
+    publicPath: '/'
   },
 
   resolve: {
     modules: ["node_modules"],
     alias: {
-      'DATA$': path.resolve(__dirname, 'src/data'),
+      'SRC': path.resolve(__dirname, 'src/'),
       'IMG': path.resolve(__dirname, 'src/assets/img'),
       'FONT': path.resolve(__dirname, 'src/assets/font'),
-      'SASS$': path.resolve(__dirname, 'src/dev/sass/main'),
+      'SASS': path.resolve(__dirname, 'src/dev/sass'),
       'APP': path.resolve(__dirname, 'src/dev/js/App')
-    },
-    extensions:['.scss','.json','.js','.jsx']
+    }
   },
 
 

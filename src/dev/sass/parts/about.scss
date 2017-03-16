@@ -1,12 +1,6 @@
 #about{
 
 	&.sub-wrapper{
-		overflow-x: hidden;
-		width: 100%;
-		position: absolute;
-		height: 100%;
-		top: 0;
-		left: 0;
 
 		.background{
 			position: absolute;
@@ -174,17 +168,13 @@
 					text-align: right;
 					right: 0;
 					font-size: 0.8em;
-					opacity: 0.33;
+					color: $darkGrey;
 					@media screen and (max-width: 800px) {
 						right: initial;
 						font-size: 1em;
 					}
-
 				}
 			}
 		}
-
 	}
-
-	
 }

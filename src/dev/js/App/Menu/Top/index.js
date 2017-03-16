@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
 
 import About from './about'
 import Home from './home'
@@ -8,17 +7,28 @@ import Project from './project'
 
 class Top extends Component {
 	render() {
-		const {pathname} = this.props.location
-		const {about,detail} = this.props.reg
-		const extraClass = detail.test(pathname) && "pair"
+		const {kind} = this.props
+		const extraClass = (kind == "detail") && "pair"
 		return (
 			<div className={"top parts "+ extraClass} >
-				{ detail.test(pathname) && <Project/> }
-				{ about.test(pathname) ? <Home /> : <About /> }
+				{ (kind == "detail") && <Project/> }
+				{ (kind == "about") ? <Home /> : <About /> }
 			</div>
 		)
 	}
 }
 
+function mapStateToProps(state) {
+  const { navigationReducer} = state
 
-export default withRouter(Top)
+  const {
+    routeKind: kind
+  } = navigationReducer
+
+  return {
+    kind
+  }
+}
+
+
+export default connect(mapStateToProps)(Top)

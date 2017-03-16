@@ -65,7 +65,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|svg|gif)$/,
-        loader: 'file-loader?name=./img/[name].[ext]',
+        loader: 'file-loader?name=./img/[name]-[hash:4].[ext]',
         include: path.join(__dirname, './src/assets/img')
       },
       {

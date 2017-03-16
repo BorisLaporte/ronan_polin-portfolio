@@ -1,7 +1,11 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 import PreloadReact from './Preload'
 import {fillContent} from './Store/content/actions'
+import {setupRoutes} from './Store/navigation/actions'
+import {getWindowSize} from './Store/responsive/actions'
+import {setupTimers} from './Store/projectAnimation/actions'
 
 import Menu from './Menu'
 import json from 'SRC/data.json'
@@ -18,15 +22,25 @@ class App extends Component {
 	}
 
 	componentWillMount() {
+		const {dispatch, location} = this.props
+		dispatch(setupRoutes(location.pathname))
+    dispatch(getWindowSize())
+    dispatch(setupTimers())
   }
 
 	componentDidMount() {
+		const {dispatch} = this.props
 		this.fillJson(json)
+    this.setListenerResponsive()
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-
-	}
+	setListenerResponsive(){
+    const self = this
+    const { dispatch } = this.props
+    window.onresize = () => {
+      dispatch(getWindowSize())
+    }
+  }
 
 	letsGo(){
 		this.setState({ready: true})
@@ -43,9 +57,9 @@ class App extends Component {
 
   render() {
 		const {ready} = this.state
-		const {children, data, color} = this.props
+		const {children, data} = this.props
     return (
-      <div className={"wrapper "+color}>
+      <div className="wrapper">
 				<PreloadReact 
 					data={data}
 					children={children}
@@ -57,25 +71,16 @@ class App extends Component {
   }
 }
 
-
-
 function mapStateToProps(state) {
   const { contentReducer} = state
-  const { colorReducer} = state
 
   const {
     items: data
   } = contentReducer
 
-  const {
-    color: color
-  } = colorReducer
-
   return {
-    data,
-    color
+    data
   }
 }
 
-
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(withRouter(App))

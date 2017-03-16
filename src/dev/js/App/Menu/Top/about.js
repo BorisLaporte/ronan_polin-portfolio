@@ -20,15 +20,14 @@ class About extends Component {
     this.setState({tl: new TimelineLite()})
   }
 
-  componentDidMount() {
-		this.enteringAnim()
-  }
-
   componentWillUpdate(nextProps, nextState) {
-    const {reg} = this.state
-    if ( nextProps.isRouting && reg.test(nextProps.reduxNextRoute) ){
+    if ( nextProps.isRouting && nextProps.nextKind == "about" ){
       this.leavingAnim()
     }
+  }
+
+  componentDidMount() {
+		this.enteringAnim()
   }
 
   handleClick(e) {
@@ -43,22 +42,34 @@ class About extends Component {
   enteringAnim(){
 		const {tl} = this.state
     const {container, title, looking} = this.refs
-    const tweenContainer = new TweenLite.from(container, 1,
+    const tweenContainer = new TweenLite.fromTo(container, 1,
 			{
-				opacity: 0,
+        opacity: 0
+      },
+      {
+				opacity: 1,
 				ease: Power2.easeOut
 			})
-    const tweenTitle = new TweenLite.from(title, 1,
+    const tweenTitle = new TweenLite.fromTo(title, 1,
 			{
-				x: -30,
-				ease: Power2.easeOut
-			})
-    const tweenLooking = new TweenLite.from(looking, 1,
+				x: -30
+			},
+      {
+        x: 0,
+        ease: Power2.easeOut,
+        clearProps:"x"
+      })
+    const tweenLooking = new TweenLite.fromTo(looking, 1,
 			{
-				x: 30,
-				ease: Power2.easeOut
-			})
-    tl.add([tweenContainer, tweenTitle, tweenLooking])
+				x: 30
+			},
+      {
+        x: 0,
+        ease: Power2.easeOut,
+        clearProps:"x"
+      })
+    tl.clear()
+    tl.add([tweenContainer, tweenTitle, tweenLooking], 0.4)
   }
 
   leavingAnim(callback = null){
@@ -80,6 +91,7 @@ class About extends Component {
 				x: -30,
 				ease: Power2.easeOut
 			})
+    tl.clear()
     tl.add([tweenContainer, tweenTitle, tweenLooking]).pause()
     if ( callback != null ){
       tl.add(callback, "-=0.8")
@@ -90,7 +102,7 @@ class About extends Component {
 	render() {
 		const {to} = this.state
 		return (
-			<a href={to} ref="container" onClick={this.handleClick} className="link" >
+			<a href={to} ref="container" onClick={this.handleClick} className="link about" >
 				<div ref="title" >.about</div>
 				<div ref="looking" className="looking-for">looking for a 6 month internship...</div>
 			</a>
@@ -103,17 +115,22 @@ function mapStateToProps(state) {
 
 
   const {
+    isRouting: isRouting,
+    nextRouteKind: nextKind,
     route: reduxRoute,
-    nextRoute: reduxNextRoute,
-    isRouting: isRouting
+    routeKind: kind,
+    comingFrom: comingFrom
   } = navigationReducer
 
   return {
+    isRouting,
+    nextKind,
     reduxRoute,
-    reduxNextRoute,
-    isRouting
+    kind,
+    comingFrom
   }
 }
 
 
-export default connect(mapStateToProps)(withRouter(About))
+export default connect(mapStateToProps)(About)
+

@@ -1,0 +1,74 @@
+.boxes-container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+  flex-flow: row wrap;
+	position: relative;
+	padding: 0 20px;
+
+	.box{
+		display: inline-block;
+		position: relative;
+
+		.value{
+			border-style: solid;
+			border-color: rgba(0,0,0,0.3);
+			border-width: 1px;
+			margin-top: -1px;
+			white-space: nowrap;
+			text-align: center;
+			min-width: 220px;
+
+			.name{
+				font-size: 0.9em;
+				margin-bottom: 10px;
+			}
+			.role{
+				font-size: 0.9em;
+				font-family: $sabonItalic;
+				color: $darkGrey;
+			}
+		}
+	}
+}
+
+
+.team-container{
+	.boxes-container{
+		padding: initial;
+	}
+	.value{
+		padding: 40px 45px;
+	}
+}
+
+.specs-container{
+	margin: 100px 0;
+
+	.value{
+		padding: 40px 60px;
+	}
+}
+
+
+.label-container{
+	position: relative;
+	top: 0;
+	transform: translateY(50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 100;
+
+	.label{
+		padding: 5px 15px;
+		line-height: 1.75;
+		letter-spacing: 1.2px;
+		font-family: $linoMedium;
+		color: $darkGrey;
+		font-size: 0.8em;
+		background: white;
+		z-index: 100;
+	}
+}

@@ -5,12 +5,14 @@ import contentReducer from './content/reducers'
 import colorReducer from './color/reducers'
 import navigationReducer from './navigation/reducers'
 import responsiveReducer from './responsive/reducers'
+import projectAnimationReducer from './projectAnimation/reducers'
 
 const theStore = combineReducers({
   contentReducer,
+  projectAnimationReducer,
   responsiveReducer,
   colorReducer,
-  navigationReducer
+  navigationReducer,
 })
 
 const loggerMiddleware = createLogger()

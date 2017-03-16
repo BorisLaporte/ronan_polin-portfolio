@@ -34,7 +34,7 @@
 			"internship": "In order to be a product designer, i’m looking for an internship in interface design (ux|ui) and ergonomics from july to december all over the world!",
 			"contact": "internship? freelance? or just a hi?",
 			"mail": "ronan.polin@gmail.com",
-			"developedBy": "developped by ",
+			"developedBy": "developed by ",
 			"superAwesomeDev": {
 				"name": "Boris Laporte",
 				"url": "http://borislaporte.com"
@@ -57,7 +57,112 @@
 			},
 			"next": "phoenix",
 			"index": 0,
-			"thumbnail": "pictures/reetags.jpg"
+			"thumbnail": "pictures/reetags.jpg",
+			"backBlur": "pictures/reetags_blur.jpg",
+			"description": {
+				"part1": "Share my purchases and buy my new discoveries ?",
+				"part2": "Nothing so simple ! Post, share, buy, comment or just a look. Reetags is a new platform, a mix between a social network and a marketplace where fashion meet its community.",
+				"link": null
+			},
+			"logo": "Reetags/logo.png",
+			"specs": {
+				"role": "ui|ux designer",
+				"time": "1 month",
+				"context": "freelance"
+			},
+			"miseEnBouche":{
+				"imgContext": [
+					"Reetags/old-version.jpg",
+					"Reetags/Home-Feed.jpg"
+				],
+				"whatIs": "My mission was to create a visual identity in order to redesign the entire platform.",
+				"quote": "Reetags was at first too dark and closed with problems of proportions.\n I had to find how to design it lighter and brighter\n for the best user experience."
+			},
+			"chapeau": ".white, space and gradient",
+			"preMess":{
+				"text": "The only creation I had to begin was the logo. With that I created the icon set.",
+				"link": null,
+				"imgs": [
+					"Reetags/icone.png"
+				]
+			},
+			"theMaze": {
+				"front":[
+					{
+						"block": 0,
+						"imgs":[
+							{
+								"url":"Reetags/Profil.jpg",
+								"kind":"big-desktop"
+							}
+						]
+					},
+					{
+						"block": 1,
+						"imgs":[
+							{
+								"url":"Reetags/feed.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Reetags/profil-img.jpg",
+								"kind":"phone"
+							}
+						]
+					},
+					{
+						"block": 2,
+						"imgs":[
+							{
+								"url":"Reetags/Listing-Produit.jpg",
+								"kind":"desktop"
+							},
+							{
+								"url":"Reetags/Fiche-Produit.jpg",
+								"kind":"desktop"
+							}
+						]
+					},
+					{
+						"block": 3,
+						"imgs":[
+							{
+								"url":"Reetags/produit.jpg",
+								"kind":"phone"
+							}
+						]
+					},
+					{
+						"block": 4,
+						"imgs":[
+							{
+								"url":"Reetags/Mes-produits.jpg",
+								"kind":"desktop"
+							},
+							{
+								"url":"Reetags/Ventes.jpg",
+								"kind":"desktop"
+							}
+						]
+					},
+					{
+						"block": 5,
+						"imgs":[
+							{
+								"url":"Reetags/Modifier-Produit.jpg",
+								"kind":"desktop"
+							},
+							{
+								"url":"Reetags/Mes-produits-responsive.jpg",
+								"kind":"phone"
+							}
+						]
+					}
+				],
+				"back":null
+			},
+			"hardComponent": "Reetags",
+			"team": []
 		},
 		"phoenix":{
 			"title":"phoenix",
@@ -69,7 +174,137 @@
 			},
 			"next": "lipsty",
 			"index": 1,
-			"thumbnail": "pictures/phoenix.jpg"
+			"thumbnail": "pictures/phoenix.jpg",
+			"backBlur": "pictures/phoenix_blur.jpg",
+			"description": {
+				"part1": "Phoenix empowers patients in real time and helps decreasing or stoping their addiction.",
+				"part2": "Used between two consultations, its main target is the management of craving, without being specific to a product or a behavior. Targeted questions help to find the most appropriate strategy and allows the doctor to monitor the patient more thoroughly.",
+				"link": {
+					"text": "see the website",
+					"url": "#"
+				}
+			},
+			"logo": "Phoenix/logo.png",
+			"specs": {
+				"role": "product designer",
+				"time": "since april 2016",
+				"context": "personnal project"
+			},
+			"miseEnBouche":{
+				"imgContext": [
+					"Phoenix/HOME.jpg",
+					"Phoenix/ACCUEIL.jpg",
+					"Phoenix/Accueil-(2).jpg"
+				],
+				"whatIs": "The project emerges from the meeting of medical and tech professionals in an E-Heatlh Challenge.\nWe won the treatment award and decided to develop this product in order to launch our first user test in an\nimportant psychiatric hospital (Saint-Anne Hospital in Paris).",
+				"quote": "Designing a medical app is complex and leads to significant consequences.\nThe application has to be accessible and easily understandable in any situation,\nwhile quick to use and compliant with regulations."
+			},
+			"chapeau": ".accessibility and minimalist",
+			"preMess":{
+				"text": "Simplicity and swiftness from opening the app to getting the best strategy.",
+				"link": null,
+				"imgs": [
+					"Phoenix/SPLASHSCREEN.jpg",
+					"Phoenix/ACCUEIL.jpg",
+					"Phoenix/INTRO.jpg"
+				]
+			},
+			"theMaze": {
+				"front":[
+					{
+						"block": 0,
+						"imgs":[
+							{
+								"url":"Phoenix/1-LIEUX.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Phoenix/2-QUI.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Phoenix/3-EMOTION.jpg",
+								"kind":"phone"
+							}
+						]
+					},
+					{
+						"block": 1,
+						"imgs":[
+							{
+								"url":"Phoenix/4-PENSEE.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Phoenix/FELICITATION.jpg",
+								"kind":"phone"
+							}
+						]
+					},
+					{
+						"block": 2,
+						"imgs":[
+							{
+								"url":"Phoenix/RECHUTE.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Phoenix/STRATEGIE01.jpg",
+								"kind":"phone"
+							}
+						]
+					},
+					{
+						"block": 3,
+						"imgs":[
+							{
+								"url":"Phoenix/PROFIL-contact.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Phoenix/PROFIL-contact-modifier.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Phoenix/PROFIL-motivations.jpg",
+								"kind":"phone"
+							}
+						]
+					}
+				],
+				"back":null
+			},
+			"hardComponent": "Phoenix",
+			"team": [
+				{
+					"name": "morgan caron",
+					"role": "lead developer"
+				},
+				{
+					"name": "anne chassagnoux",
+					"role": "health executive"
+				},
+				{
+					"name": "julie dupouy",
+					"role": "psychiatric nurse"
+				},
+				{
+					"name": "jean-pierre gay",
+					"role": "developer"
+				},
+				{
+					"name": "chloé lucet",
+					"role": "psychiatric addictologist"
+				},
+				{
+					"name": "anne-victoire rousselet",
+					"role": "psychologist"
+				},
+				{
+					"name": "camille vuaille",
+					"role": "ux designer"
+				}
+			]
 		},
 		"lipsty":{
 			"title":"lipsty",
@@ -81,7 +316,167 @@
 			},
 			"next": "reetags",
 			"index": 2,
-			"thumbnail": "pictures/lipsty.jpg"
+			"thumbnail": "pictures/lipsty.jpg",
+			"backBlur": "pictures/lipsty_blur.jpg",
+			"description": {
+				"part1": "Never dare to talk to handsome or pretty strangers?",
+				"part2": "No problem, Lispty will help you chose the perfect cocktail for him/her, with a little punchline to introduce yourself and even a full description/video to help you make it.",
+				"link": {
+					"text": "available here",
+					"url": "https://play.google.com/store/apps/details?id=borislaporte.lipstyapp"
+				}
+			},
+			"logo": "Lipsty/logo.png",
+			"specs": {
+				"role": "lead designer",
+				"time": "3 weeks",
+				"context": "school project"
+			},
+			"miseEnBouche":{
+				"imgContext": [
+					"Lipsty/Home-wireframe.jpg",
+					"Lipsty/Home.jpg",
+					"Lipsty/Home-old.jpg"
+				],
+				"whatIs": "We had 3 weeks to create from scratch a native app for Android and IOS.",
+				"quote": "How to build a mobile app fast and entertaining enough\n to create a real engagment ?"
+			},
+			"chapeau": ".fine humor, real recipe",
+			"preMess":{
+				"text": "Lispsty is based on ",
+				"link": {
+					"name": "Absolut Drinks Database API.",
+					"url": "https://addb.absolutdrinks.com/docs/"
+				},
+				"imgs": [
+					"Lipsty/lipsty.gif"
+				]
+			},
+			"theMaze": {
+				"front":[
+					{
+						"block": 0,
+						"imgs":[
+							{
+								"url":"Lipsty/Splashcreen.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Lipsty/Home.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Lipsty/List.jpg",
+								"kind":"phone"
+							}
+						]
+					},
+					{
+						"block": 1,
+						"imgs":[
+							{
+								"url":"Lipsty/Question1.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Lipsty/Question2.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Lipsty/Question3.jpg",
+								"kind":"phone"
+							}
+						]
+					},
+					{
+						"block": 2,
+						"imgs":[
+							{
+								"url":"Lipsty/Question4-orange.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Lipsty/Question5.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Lipsty/Question6.jpg",
+								"kind":"phone"
+							}
+						]
+					},
+					{
+						"block": 3,
+						"imgs":[
+							{
+								"url":"Lipsty/Wait-answers.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Lipsty/Answers.jpg",
+								"kind":"phone"
+							},
+							{
+								"url":"Lipsty/Cocktail.jpg",
+								"kind":"phone"
+							}
+						]
+					},
+					{
+						"block": 4,
+						"imgs":[
+							{
+								"url":"Lipsty/Flirt-Fact.jpg",
+								"kind":"phone"
+							}
+						]
+					}
+				],
+				"back":[
+					{
+						"url":"Lipsty/absolut-bloody-mary.png",
+						"kind":"glass"
+					},
+					{
+						"url":"Lipsty/absolut-cosmopolitan.png",
+						"kind":"glass"
+					},
+					{
+						"url":"Lipsty/absolut-pears-martini.png",
+						"kind":"glass"
+					},
+					{
+						"url":"Lipsty/negroni.png",
+						"kind":"glass"
+					},
+					{
+						"url":"Lipsty/absolut-champeach.png",
+						"kind":"glass"
+					}
+				]
+			},
+			"team": [
+				{
+					"name": "margaux cabrol",
+					"role": "content"
+				},
+				{
+					"name": "boris laporte",
+					"role": "developer android"
+				},
+				{
+					"name": "matthieu soum",
+					"role": "design"
+				},
+				{
+					"name": "matthieu tourdes",
+					"role": "content"
+				},
+				{
+					"name": "martin ziserman",
+					"role": "developer iOS"
+				}
+			]
 		}
 	}
 }

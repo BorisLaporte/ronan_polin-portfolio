@@ -26,8 +26,7 @@ class Home extends Component {
 
 
   componentWillUpdate(nextProps, nextState) {
-    const {reg} = this.state
-    if ( nextProps.isRouting && !reg.test(nextProps.reduxNextRoute) ){
+    if ( nextProps.isRouting && nextProps.nextKind != "about" ){
       this.leavingAnim()
     }
   }
@@ -60,6 +59,7 @@ class Home extends Component {
 				y:-30,
 				ease: Power2.easeOut
 			})
+    tl.clear()
     tl.add([tweenContainer]).pause()
     if ( callback != null ){
       tl.add(callback, "-=0.8")
@@ -78,19 +78,17 @@ class Home extends Component {
 function mapStateToProps(state) {
   const { navigationReducer} = state
 
-
   const {
-    route: reduxRoute,
-    nextRoute: reduxNextRoute,
-    isRouting: isRouting
+    isRouting: isRouting,
+    nextRouteKind: nextKind,
+    routeKind: kind
   } = navigationReducer
 
   return {
-    reduxRoute,
-    reduxNextRoute,
-    isRouting
+    isRouting,
+    nextKind,
+    kind
   }
 }
 
-
-export default connect(mapStateToProps)(withRouter(Home))
+export default connect(mapStateToProps)(Home)

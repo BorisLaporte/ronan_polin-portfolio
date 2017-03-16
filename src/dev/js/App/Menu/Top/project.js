@@ -9,8 +9,7 @@ class Project extends Component {
 
 		this.state = {
       tl: null,
-      reg: /detail$/,
-      to: '/'
+      prefix: '/projects/'
 		}
 
 		this.handleClick = this.handleClick.bind(this)
@@ -20,23 +19,22 @@ class Project extends Component {
     this.setState({tl: new TimelineLite()})
   }
 
-  componentDidMount() {
-		this.enteringAnim()
-  }
-
-
   componentWillUpdate(nextProps, nextState) {
-    const {reg} = this.state
-    if ( nextProps.isRouting && reg.test(nextProps.reduxNextRoute) ){
+    if ( nextProps.isRouting && nextProps.nextKind != "detail"){
       this.leavingAnim()
     }
   }
 
+  componentDidMount() {
+    this.enteringAnim()
+  }
+
   handleClick(e) {
-    const {to} = this.state
+    const {prefix} = this.state
+    const {name} = this.props.params
     e.preventDefault()
     this.leavingAnim(() => {
-			browserHistory.push(to)
+			browserHistory.push(prefix+name)
     })
   }
 
@@ -57,7 +55,7 @@ class Project extends Component {
     const tweenContainer = new TweenLite.to(container, 1,
 			{
 				opacity:0,
-				y:-20,
+				x:-20,
 				ease: Power2.easeOut
 			})
     tl.add([tweenContainer]).pause()
@@ -68,9 +66,8 @@ class Project extends Component {
   }
 
 	render() {
-		const {to} = this.state
 		return (
-			<a href={to} className="link" onClick={this.handleClick} ref="container" >.project</a>
+			<a href="#" className="link project" onClick={this.handleClick} ref="container" >.project</a>
 		)
 	}
 }
@@ -80,15 +77,15 @@ function mapStateToProps(state) {
 
 
   const {
-    route: reduxRoute,
-    nextRoute: reduxNextRoute,
-    isRouting: isRouting
+    isRouting: isRouting,
+    nextRouteKind: nextKind,
+    routeKind: kind
   } = navigationReducer
 
   return {
-    reduxRoute,
-    reduxNextRoute,
-    isRouting
+    isRouting,
+    nextKind,
+    kind
   }
 }
 

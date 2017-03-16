@@ -1,113 +1,140 @@
 #menu{
+  .about{
+    transition: color 0.2s ease-in-out, left 1.4s ease-out, transform 1.4s ease-out !important;
+    .looking-for{
+      position: absolute;
+      font-family: $sabonItalic;
+      font-size: 0.9em;
+      letter-spacing: 1.4px;
+      left: 20px;
+      margin-top: 10px;
+      white-space: nowrap;
+      // color: $darkGrey;
+    }
+  }
+  .next{
+    float: right;
+    text-align: right;
+    @media screen and (max-width: 900px) {
+      float: initial;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .top{
+    top: 0;
+    position: fixed;
+    padding: 45px 100px;
+    @media screen and (max-width: 600px) {
+      padding: 25px 30px;
+    }
 
-  
+    .link{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    &.pair{
+      width: 90%;
+      left: 50%;
+      transform: translateX(-50%);
+      .about{
+        left: 100%;
+        transform: translateX(-100%);
+
+        .looking-for{
+          left: 100%;
+          transform: translateX(-100%);
+        }
+      }
+      .project{
+        left: 0;
+        transform: translateX(0);
+      }
+    }
+  }
+  .bottom{
+    bottom: 0;
+    position: absolute;
+    padding: 45px 100px;
+    @media screen and (max-width: 600px) {
+      padding: 25px 0px;
+    }
+
+    .link{
+      position: relative;
+    }
+  }
   .link{
     padding: 5px;
+    display: inline-block;
+    opacity: 1;
+    will-change: opacity;
+    transition: color 0.2s ease-in-out;
   }
-  
 	.parts{
-		position: absolute;
-		display: block;
+		display: inline-block;
+    height: auto;
 		width: 100%;
-		padding: 45px 100px;
-		@media screen and (max-width: 600px) {
-			padding: 25px 30px;
-		}
+    
 	}
-	.top{
-		top: 0;
+
+  .chinese-list{
     display: flex;
-    justify-content: space-around;
-    &.pair{
-    	justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+
+    .chinese-number{
+      position: relative;
+      width: 50px;
+      min-height: 30px;
+      padding: 7px;
+      margin: 3px;
+      opacity: 0.3;
+      transform: scale(0.9);
+      transition: all 0.2s ease-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      will-change: opacity, transform;
+
+      &:hover, &.active{
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .chinese-string{
+        position: relative;
+        height: 3px;
+        border-radius: 1px;
+        margin-top: 8px;
+
+      }
+      &.n-0{
+        .chinese-string{
+          width: 100%;
+        }
+      }
+      &.n-1{
+        .chinese-string:nth-child(1){
+          width: 80%;
+        }
+        .chinese-string:nth-child(2){
+          width: 100%;
+        }
+      }
+      &.n-2{
+        .chinese-string:nth-child(1){
+          width: 80%;
+        }
+        .chinese-string:nth-child(2){
+          width: 60%;
+        }
+        .chinese-string:nth-child(3){
+          width: 100%;
+        }
+      }
     }
-    .link{
-    	position: relative;
-    	display: inline-block;
-    	opacity: 1;
-    	will-change: opacity;
-
-	    .looking-for{
-	    	position: absolute;
-	    	font-family: $sabonItalic;
-	    	font-size: 0.9em;
-	    	letter-spacing: 1.4px;
-	    	left: 20px;
-	    	margin-top: 10px;
-	    	white-space: nowrap;
-	    }
-    }
-	}
-	.bottom{
-		bottom: 0;
-    display: flex;
-    justify-content: space-around;
-
-    .projects{
-
-    	.title{
-			margin-bottom: 10px;
-			text-align: center;
-    	}
-    	.chinese-list{
-    		display: flex;
-    		justify-content: center;
-    		align-items: center;
-
-    		.chinese-number{
-    			position: relative;
-    			width: 35px;
-    			min-height: 30px;
-    			padding: 7px;
-    			margin: 3px;
-  				opacity: 0.3;
-  				transform: scale(0.9);
-  				transition: all 0.2s ease-out;
-  				display: flex;
-  				flex-direction: column;
-  				justify-content: center;
-    			align-items: center;
-    			will-change: opacity, transform;
-
-    			&:hover, &.active{
-  					opacity: 1;
-  					transform: scale(1);
-  				}
-
-    			.chinese-string{
-    				position: relative;
-    				height: 3px;
-    				border-radius: 1px;
-    				margin-top: 8px;
-
-    			}
-    			&.n-0{
-						.chinese-string{
-							width: 100%;
-						}
-    			}
-    			&.n-1{
-    				.chinese-string:nth-child(1){
-							width: 80%;
-    				}
-						.chinese-string:nth-child(2){
-							width: 100%;
-						}
-    			}
-    			&.n-2{
-    				.chinese-string:nth-child(1){
-							width: 80%;
-    				}
-						.chinese-string:nth-child(2){
-							width: 60%;
-						}
-						.chinese-string:nth-child(3){
-							width: 100%;
-						}
-
-    			}
-    		}
-    	}
-    }
-	}
+  }
 }

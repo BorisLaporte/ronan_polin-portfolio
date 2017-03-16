@@ -97,7 +97,10 @@ export default class PreloadReact extends Component {
       ready && children ? 
       children 
       : 
-      <div className="sub-wrapper center shadowy" ref={c => this.container = c}>{status}%</div>
+      <div 
+        className="sub-wrapper fullscreen shadowy" 
+        ref={c => this.container = c}>{status}%
+      </div>
     )
   }
 }

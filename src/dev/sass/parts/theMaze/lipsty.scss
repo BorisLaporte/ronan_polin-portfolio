@@ -1,0 +1,74 @@
+.the-maze-of-lipsty{
+
+	.front{
+		.block-0{
+			.ref{
+				margin-left: -10%;
+				margin-top: -15%;
+				img{
+					
+				}
+			}
+			.n-1{
+				margin-left: -3%;
+				margin-top: 30%;
+			}
+			.n-2{
+				margin-left: 15%;
+				margin-top: 8%;
+			}
+		}
+		.block-1{
+			.ref{
+				margin-left: 12%;
+				margin-top: 7%;
+				z-index: 100;
+			}
+			.n-1{
+				margin-left: 5%;
+				margin-top: 0%;
+			}
+			.n-2{
+				margin-left: 5%;
+				margin-top: 0%;
+			}
+		}
+		.block-2{
+			.ref{
+				margin-left: 0%;
+				margin-top: -4%;
+			}
+			.n-1{
+				margin-left: 19%;
+				margin-top: -3%;
+			}
+			.n-2{
+				margin-left: 3%;
+				margin-top: 2%;
+			}
+		}
+		.block-3{
+			.ref{
+				margin-left: 0%;
+				margin-top: -4%;
+				z-index: 100;
+			}
+			.n-1{
+				margin-left: 9%;
+				margin-top: 3%;
+				z-index: 100;
+			}
+			.n-2{
+				margin-left: 3%;
+				margin-top: 7%;
+			}
+		}
+		.block-4{
+			padding-bottom: 5%;
+			.ref{
+				margin-left: -23%;
+				margin-top: -7%;
+			}
+		}
+	}
+}

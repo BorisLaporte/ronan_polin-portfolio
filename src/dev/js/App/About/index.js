@@ -22,7 +22,6 @@ class About extends Component {
 
 	componentDidMount() {
 		const {route, router} = this.props
-    // console.log(router)
     router.setRouteLeaveHook(route, this.routerWillLeave)
     this.animationEnter()
   }
@@ -78,7 +77,7 @@ class About extends Component {
 	render() {
 		const { title, background, links, details} = this.props.data.about
 		return (
-			<div id="about" className="sub-wrapper" ref="about">
+			<div id="about" className="sub-wrapper fullscreen hidden" ref="about">
 				<img className="background" src={require("IMG/"+background)} alt="about" />
 				<div className="content">
 					<div className="main">

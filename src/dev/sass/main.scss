@@ -2,12 +2,24 @@
 @import 'config/_colors.scss';
 @import 'config/_font.scss';
 
+@import 'common/_general.scss';
 @import 'common/_structure.scss';
 @import 'common/_style.scss';
 
 @import 'font-awesome/font-awesome.scss';
 
+@import 'parts/theMaze/general.scss';
+@import 'parts/theMaze/lipsty.scss';
+@import 'parts/theMaze/phoenix.scss';
+@import 'parts/theMaze/reetags.scss';
+
 @import 'parts/menu.scss';
 @import 'parts/home.scss';
 @import 'parts/about.scss';
 @import 'parts/project.scss';
+@import 'parts/hover-color.scss';
+@import 'parts/square.scss';
+@import 'parts/detail.scss';
+@import 'parts/box.scss';
+@import 'parts/mise-en-bouche.scss';
+@import 'parts/description.scss';

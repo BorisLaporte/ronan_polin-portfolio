@@ -1,0 +1,46 @@
+body{
+	font-size: 16px;
+	font-family: $sabonRoman;
+	font-weight: normal;
+	letter-spacing: 1.6px;
+	color: #000;
+	@media screen and (max-width: 600px) {
+		font-size: 14px;
+	}
+}
+
+* {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#container{
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-height: 100%;
+	min-width: 100%;
+}
+
+div, a{
+	box-sizing: border-box;
+}
+
+.wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: inherit;
+	min-height: inherit;
+	height: auto;
+}
+
+.sub-wrapper{
+	opacity: 1;
+	will-change: opacity;
+}
+
+.hidden{
+	overflow: hidden;
+}
