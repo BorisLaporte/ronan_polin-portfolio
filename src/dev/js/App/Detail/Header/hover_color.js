@@ -14,16 +14,15 @@ class HoverColor extends Component {
 	}
 
 	componentDidMount() {
-		// this.enterAnim()
+		const {comingFrom} = this.props.event
+		if (comingFrom == "detail"){
+			this.enterAnim()
+		}
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		const {title, color, intro, event} = this.props
-		if ( nextProps.event != event 
-			|| nextProps.title != title 
-			|| nextProps.intro != intro 
-			|| nextProps.color != color 
-		){
+		const {thumbnail, event} = this.props
+		if ( nextProps.event != event || nextProps.thumbnail != thumbnail ){
 			return true
 		}
 		return false
@@ -34,20 +33,17 @@ class HoverColor extends Component {
 	}
 
 	handleAnimations(){
-		const {type, where, comingFrom, data} = this.props.event
+		const {type, where, comingFrom} = this.props.event
 		if ( type == "leaving" ){
-			// console.log("leaving")
 			this.leavingAnim()
 		} else if ( type == "entering" ){
-			// console.log("entering " + comingFrom)
-			if (comingFrom != "projects"){
+			if (comingFrom == "detail"){
 				this.enterAnim()
 			}
 		}
 	}
 
 	enterAnim(){
-		// console.log("anim")
 		const {tl} = this.state
 		const {main} = this.refs
 		const tweenMain = new TweenLite.fromTo(main, 2,
@@ -60,7 +56,7 @@ class HoverColor extends Component {
 				// immediateRender: false
 			})
 		tl.clear()
-		tl.add([tweenMain], 0.1)
+		tl.add([tweenMain], 0.3)
 
 	}
 
@@ -73,7 +69,7 @@ class HoverColor extends Component {
 				ease: Power2.easeOut
 			})
 		tl.clear()
-		tl.add([tweenMain], 0.2)
+		tl.add([tweenMain], 0.5)
 	}
 
 	render() {

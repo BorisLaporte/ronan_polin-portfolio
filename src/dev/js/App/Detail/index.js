@@ -21,44 +21,22 @@ class Detail extends Component {
 	}
 
 	componentDidMount() {
-		const {router, route, comingFrom} = this.props
+		const {router, route} = this.props
     if ( this.checkData() ){
       router.setRouteLeaveHook(route, this.routerWillLeave)
-    //   if ( comingFrom == "projects"){
-				// this.enteringAnim(true)
-    //   } else {
-				// this.enteringAnim(false)
-    //   }
     }
 	}
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   const {reduxNextRoute, reduxRoute, nextRouteKind, isRouting}= this.props
-  //   const {readyForNext}= this.state
-  //   if ( !isRouting ){
-  //     if ( 
-  //       (nextProps.reduxNextRoute != reduxNextRoute)
-  //       ||(readyForNext)
-  //     ){
-  //       return true
-  //     }
-  //   } else if (nextProps.reduxRoute != reduxRoute) {
-  //     return true
-  //   }
-  //   return false
-  // }
+  shouldComponentUpdate(nextProps, nextState) {
+    const {location}= this.props
+    if ( location != nextProps.location ){
+      return true
+    }
+    return false
+  }
 
   componentDidUpdate(prevProps, prevState) {
-		const {isRouting} = this.props
-		// if ( isRouting ){
-		// 	console.log("leaving")
-		// } else {
-		// 	console.log("entering")
-		// 	// this.enteringAnim(false)
-		// }
-		console.log(prevProps)
-		console.log(this.props)
-		console.log("!!!!!!!!!!! DETAIL")
+		this.checkData()
   }
 
 	checkData(){
@@ -84,9 +62,7 @@ class Detail extends Component {
 				self.setAndGo(nextLocation.pathname)
 			}, 2000)
 			this.setState({timeout: newTimeout})
-			return false		// {
-   //      opacity: 0
-   //    },
+			return false
 		}
   }
 
@@ -97,46 +73,6 @@ class Detail extends Component {
 		dispatch({ type: DID_PUSH })
 		window.scrollTo(0, 0)
   }
-
- //  enteringAnim(fromProject = false){
-	// 	const {tl} = this.state
-	// 	const {main, hoverColor} = this.refs
-	// 	window.scrollTo(0, 0)
-	// 	tl.clear()
-	// 	if ( !fromProject ){
-	// 		const tweenMain = new TweenLite.fromTo(main, 1,
-	// 			{
-	// 				opacity:0
-	// 			},
-	// 			{
-	// 				opacity:1,
-	// 				ease: Power2.easeOut
-	// 			})
-	// 		tl.add([tweenMain], 0.1)
-	// 	} else {
-	// 		const tweenMain = new TweenLite.to(main, 1,
-	// 			{
-	// 				opacity:1,
-	// 				ease: Power2.easeOut
-	// 			})
-	// 		tl.add([tweenMain], 0.1)
-	// 	}
- //  }
-
- //  leavingAnim(callback = null){
-	// 	const {tl} = this.state
-	// 	const {main} = this.refs
-	// 	const tweenMain = new TweenLite.to(main, 1,
-	// 		{
-	// 			opacity:0,
-	// 			ease: Power2.easeOut
-	// 		})
-	// 	tl.clear()
-	// 	tl.add([tweenMain], 0.2)
-	// 	if ( callback != null ){
-	// 		tl.add(callback)
-	// 	}
-	// }
 
 	render() {
 		const {params, data} = this.props
@@ -152,27 +88,13 @@ class Detail extends Component {
 
 function mapStateToProps(state) {
   const { contentReducer} = state
-  const { navigationReducer} = state
 
   const {
     items: data
   } = contentReducer
 
-  const {
-    route: reduxRoute,
-    nextRoute: reduxNextRoute,
-    nextRouteKind: nextRouteKind,
-    isRouting: isRouting,
-    comingFrom: comingFrom
-  } = navigationReducer
-
   return {
-    data,
-    reduxRoute,
-    reduxNextRoute,
-    isRouting,
-    nextRouteKind,
-    comingFrom
+    data
   }
 }
 

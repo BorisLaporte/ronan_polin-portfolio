@@ -14,12 +14,19 @@ class TitleIntro extends Component {
 	}
 
 	componentDidMount() {
-		this.enterAnim(false)
+		const {comingFrom} = this.props.event
+		if (comingFrom == "detail"){
+			this.enterAnim(false)
+		}
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		const {thumbnail, event} = this.props
-		if ( nextProps.event != event || nextProps.thumbnail != thumbnail ){
+		const {title, color, intro, event} = this.props
+		if ( nextProps.event != event 
+			|| nextProps.title != title 
+			|| nextProps.intro != intro 
+			|| nextProps.color != color 
+		){
 			return true
 		}
 		return false
@@ -50,8 +57,7 @@ class TitleIntro extends Component {
 				ease: Power2.easeOut
 			})
 		tl.clear()
-		tl.add([tweenMain], 0.2)
-
+		tl.add([tweenMain], 1)
 	}
 
 	leavingAnim(){
