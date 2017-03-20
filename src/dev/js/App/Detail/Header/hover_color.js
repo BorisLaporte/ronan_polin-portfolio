@@ -46,30 +46,29 @@ class HoverColor extends Component {
 	enterAnim(){
 		const {tl} = this.state
 		const {main} = this.refs
-		const tweenMain = new TweenLite.fromTo(main, 2,
+		const tweenMain = new TweenLite.fromTo(main, 1,
 			{
 				opacity:0
 			},
 			{
 				opacity:1,
-				ease: Power2.easeOut
-				// immediateRender: false
+				ease: Power2.easeInOut
 			})
 		tl.clear()
-		tl.add([tweenMain], 0.3)
+		tl.add([tweenMain], 1)
 
 	}
 
 	leavingAnim(){
 		const {tl} = this.state
 		const {main} = this.refs
-		const tweenMain = new TweenLite.to(main, 2,
+		const tweenMain = new TweenLite.to(main, 1,
 			{
 				opacity:0,
-				ease: Power2.easeOut
+				ease: Power2.easeInOut
 			})
 		tl.clear()
-		tl.add([tweenMain], 0.5)
+		tl.add([tweenMain])
 	}
 
 	render() {

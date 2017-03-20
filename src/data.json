@@ -3,15 +3,15 @@
 		"firstName": "ronan",
 		"lastName": "polin",
 		"date": "- portfolio 2017",
-		"student": "student at hetic ",
-		"freelance": "& freelance ux|ui designer"
+		"student": "student at hetic",
+		"freelance": " & freelance ux|ui designer"
 	},
 	"about": {
 		"title": ".about",
 		"background": "pictures/about.jpg",
 		"links": [
 			{
-				"name": "dribble",
+				"name": "dribbble",
 				"url": "#"
 			},
 			{
@@ -25,14 +25,14 @@
 		],
 		"details": {
 			"hi": "hello !",
-			"whoAmI": "I’m ronan, a student based in Paris in 4th years at ",
+			"whoAmI": "I’m Ronan, a student based in Paris in 4th year at ",
 			"school": {
-				"name": "hetic",
+				"name": "HETIC",
 				"url": "https://www.hetic.net/"
 			},
-			"doingWhat": " working also as ux|ui freelancer.",
-			"internship": "In order to be a product designer, i’m looking for an internship in interface design (ux|ui) and ergonomics from july to december all over the world!",
-			"contact": "internship? freelance? or just a hi?",
+			"doingWhat": " working also as an ux|ui freelancer.",
+			"internship": "Enthusiastic about ways to improve life through design in order to create a meaningful impact, I’m looking for a 6-month internship in product design from July to December.",
+			"contact": "If you are interested please contact me at",
 			"mail": "ronan.polin@gmail.com",
 			"developedBy": "developed by ",
 			"superAwesomeDev": {
@@ -60,8 +60,8 @@
 			"thumbnail": "pictures/reetags.jpg",
 			"backBlur": "pictures/reetags_blur.jpg",
 			"description": {
-				"part1": "Share my purchases and buy my new discoveries ?",
-				"part2": "Nothing so simple ! Post, share, buy, comment or just a look. Reetags is a new platform, a mix between a social network and a marketplace where fashion meet its community.",
+				"part1": "A cross between a social network and an e-commerce platform, Reetags gives you the opportunity to share, post or comment the latest fashionable clothes of the community. Users are both sellers and clients. They are able to buy what they like and sell what they share.",
+				"part2": " ",
 				"link": null
 			},
 			"logo": "Reetags/logo.png",
@@ -75,12 +75,12 @@
 					"Reetags/old-version.jpg",
 					"Reetags/Home-Feed.jpg"
 				],
-				"whatIs": "My mission was to create a visual identity in order to redesign the entire platform.",
-				"quote": "Reetags was at first too dark and closed with problems of proportions.\n I had to find how to design it lighter and brighter\n for the best user experience."
+				"whatIs": "The company previously asked a designer to design Reetags but the result hadn’t met their expectations. I had to rethink the product and propose a new strong and trendy graphic identity as well as produce all the screens of the platform on different devices.",
+				"quote": "At first Reetags was too dark and “closed”, which was problematic for daily use, so I had to find a way to give it a lighter and brighter design while making ergonomic modifications in order to enhance the user experience."
 			},
 			"chapeau": ".white, space and gradient",
 			"preMess":{
-				"text": "The only creation I had to begin was the logo. With that I created the icon set.",
+				"text": "The logo was my only starting point, from there I started by creating an icon set",
 				"link": null,
 				"imgs": [
 					"Reetags/icone.png"
@@ -177,7 +177,7 @@
 			"thumbnail": "pictures/phoenix.jpg",
 			"backBlur": "pictures/phoenix_blur.jpg",
 			"description": {
-				"part1": "Phoenix empowers patients in real time and helps decreasing or stoping their addiction.",
+				"part1": "Phoenix empowers patients in real time and helps decreasing or stopping their addiction.",
 				"part2": "Used between two consultations, its main target is the management of craving, without being specific to a product or a behavior. Targeted questions help to find the most appropriate strategy and allows the doctor to monitor the patient more thoroughly.",
 				"link": {
 					"text": "see the website",
@@ -196,12 +196,12 @@
 					"Phoenix/ACCUEIL.jpg",
 					"Phoenix/Accueil-(2).jpg"
 				],
-				"whatIs": "The project emerges from the meeting of medical and tech professionals in an E-Heatlh Challenge.\nWe won the treatment award and decided to develop this product in order to launch our first user test in an\nimportant psychiatric hospital (Saint-Anne Hospital in Paris).",
-				"quote": "Designing a medical app is complex and leads to significant consequences.\nThe application has to be accessible and easily understandable in any situation,\nwhile quick to use and compliant with regulations."
+				"whatIs": "The project emerged from the meeting of medical and tech professionals in an E-Health Challenge. We won the treatment award and decided to develop this product in order to launch our first user test in an important psychiatric hospital (Saint-Anne Hospital in Paris).",
+				"quote": "Designing a medical app is complex and leads to significant consequences (/has great impact?). The application has to be accessible and easily understandable in any situation, while quick to use and compliant with regulations."
 			},
-			"chapeau": ".accessibility and minimalist",
+			"chapeau": ".accessibility and minimalism",
 			"preMess":{
-				"text": "Simplicity and swiftness from opening the app to getting the best strategy.",
+				"text": "Simplicity and swiftness from opening the app to get the best strategy.",
 				"link": null,
 				"imgs": [
 					"Phoenix/SPLASHSCREEN.jpg",
@@ -320,7 +320,7 @@
 			"backBlur": "pictures/lipsty_blur.jpg",
 			"description": {
 				"part1": "Never dare to talk to handsome or pretty strangers?",
-				"part2": "No problem, Lispty will help you chose the perfect cocktail for him/her, with a little punchline to introduce yourself and even a full description/video to help you make it.",
+				"part2": "No problem, Lipsty will help you to choose the perfect cocktail for him/her, with a little punchline to introduce yourself and even a full description/video to help you make it.",
 				"link": {
 					"text": "available here",
 					"url": "https://play.google.com/store/apps/details?id=borislaporte.lipstyapp"
@@ -338,12 +338,12 @@
 					"Lipsty/Home.jpg",
 					"Lipsty/Home-old.jpg"
 				],
-				"whatIs": "We had 3 weeks to create from scratch a native app for Android and IOS.",
-				"quote": "How to build a mobile app fast and entertaining enough\n to create a real engagment ?"
+				"whatIs": "We had 3 weeks to create from scratch a native app for Android and iOS. Because it was not a full-time project, being the most efficient and using fast processes was a priority. We focused on a fun project but it was not so easy. Behind this superficial side it raised some interesting problematics.",
+				"quote": "How to create real engagement on a very specific use? How to have the good tone to be entertaining enough? What’s the interest for the users? Even on the simplest project, really interesting questions can arise and lead to something bigger."
 			},
 			"chapeau": ".fine humor, real recipe",
 			"preMess":{
-				"text": "Lispsty is based on ",
+				"text": "Lipsty is based on ",
 				"link": {
 					"name": "Absolut Drinks Database API.",
 					"url": "https://addb.absolutdrinks.com/docs/"
@@ -430,28 +430,6 @@
 								"kind":"phone"
 							}
 						]
-					}
-				],
-				"back":[
-					{
-						"url":"Lipsty/absolut-bloody-mary.png",
-						"kind":"glass"
-					},
-					{
-						"url":"Lipsty/absolut-cosmopolitan.png",
-						"kind":"glass"
-					},
-					{
-						"url":"Lipsty/absolut-pears-martini.png",
-						"kind":"glass"
-					},
-					{
-						"url":"Lipsty/negroni.png",
-						"kind":"glass"
-					},
-					{
-						"url":"Lipsty/absolut-champeach.png",
-						"kind":"glass"
 					}
 				]
 			},

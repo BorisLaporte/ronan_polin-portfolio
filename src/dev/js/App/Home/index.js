@@ -49,7 +49,7 @@ class Home extends Component {
 
   animationLeave(callback){
 		const {tl} = this.state
-		const {home} = this.refs
+		const {home, intro, content} = this.refs
 		tl.clear()
 		const body = new TweenLite.to(home, 0.5,
 			{	
@@ -57,12 +57,22 @@ class Home extends Component {
 				ease: Power2.easeOut,
 				onComplete: callback
 			})
-		tl.add([body])
+		const tweenIntro = new TweenLite.to(intro, 1,
+			{
+				x: 100+"%",
+				ease: Power2.easeOut
+			})
+		const tweenContent = new TweenLite.to(content, 1,
+			{
+				x: -100+"%",
+				ease: Power2.easeOut
+			})
+		tl.add([tweenIntro, tweenContent]).add([body], '-=0.6')
   }
 
   animationEnter(){
 		const {tl} = this.state
-		const {home} = this.refs
+		const {home, intro, content} = this.refs
 		const body = new TweenLite.fromTo(home, 1,
 			{
 				opacity: 0
@@ -71,8 +81,25 @@ class Home extends Component {
 				opacity: 1,
 				ease: Power2.easeOut
 			})
-		tl.add([body], 1)
+		const tweenIntro = new TweenLite.fromTo(intro, 1,
+			{
+				x: 50+"%"
+			},
+			{
+				x: 0+"%",
+				ease: Power2.easeOut
+			})
+		const tweenContent = new TweenLite.fromTo(content, 1,
+			{
+				x: -100+"%"
+			},
+			{
+				x: 0+"%",
+				ease: Power2.easeOut
+			})
+		tl.add([body], 1).add([tweenContent, tweenIntro], "-=0.4")
   }
+
 
 	render() {
 		const {firstName, lastName, date, student, freelance} = this.props.data.home
@@ -85,10 +112,12 @@ class Home extends Component {
 					</div>
 					<div className="date">{date}</div>
 				</div>
-				<div className="intro center">
-					<div className="content" >
-						<span className="line">{student}</span>
-						<span className="line">{freelance}</span>
+				<div className="wrapper-intro center">
+					<div className="intro" ref="intro">
+						<div className="content" ref="content">
+							<span className="line">{student}&nbsp;</span>
+							<span className="line">{freelance}</span>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -6,30 +6,53 @@
 		left: 0;
 		will-change: transform;
 
+	.section{
+		overflow: hidden;
+	}
+
 	.square{
 		position: absolute;
-		// width: 1170px;
+		width: 1170px;
 		border-width: 8px;
 		border-style: solid;
+		left: calc(65px + 50%);
+		transform: translateX(-50%);
 		opacity: 1;
-		transition: border-color ease-in-out 0.2s 1s;
+		transition: border-color ease-in-out 1s;
 		will-change: border-color;
-		// @media screen and (max-width: 1400px) {
-		// 	width: 970px;
-		// 	border-width: 6px;
-		// }
-		// @media screen and (max-width: 1200px) {
-		// 	width: 870px;
-		// 	border-width: 6px;
-		// }
-		// @media screen and (max-width: 1000px) {
-		// 	width: 770px;
-		// 	border-width: 6px;
-		// }
-		// @media screen and (max-width: 850px) {
-		// 	width: 770px;
-		// 	border-width: 6px;
-		// 	left: 70%;
-		// }
+		@media screen and (max-width: 1700px) {
+			width: 1070px;
+			border-width: 6px;
+		}
+		@media screen and (max-width: 1400px) {
+			width: 970px;
+			border-width: 6px;
+		}
+		@media screen and (max-width: 1200px) {
+			width: 870px;
+			border-width: 6px;
+		}
+		@media screen and (max-width: 1000px) {
+			width: 770px;
+			border-width: 6px;
+		}
+		@media screen and (max-width: 850px) {
+			width: 100%;
+			border-width: 6px;
+			left: 70%;
+		}
+
+		&.top{
+			top: 30%;
+			bottom: -10px;
+		}
+		&.middle{
+			top:-10px;
+			bottom: -10px;
+		}
+		&.bottom{
+			top: -10px;
+			bottom: 30%;	
+		}
 	}
 }

@@ -25,7 +25,14 @@ module.exports = {
       'IMG': path.resolve(__dirname, 'src/assets/img'),
       'FONT': path.resolve(__dirname, 'src/assets/font'),
       'SASS': path.resolve(__dirname, 'src/dev/sass'),
-      'APP': path.resolve(__dirname, 'src/dev/js/App')
+      'APP': path.resolve(__dirname, 'src/dev/js/App'),
+      // Resolve path for ScrollMagic's GSAP plugin
+      'TweenLite': path.resolve('node_modules', 'gsap/src/uncompressed/TweenLite.js'),
+      'TweenMax': path.resolve('node_modules', 'gsap/src/uncompressed/TweenMax.js'),
+      'TimelineLite': path.resolve('node_modules', 'gsap/src/uncompressed/TimelineLite.js'),
+      'TimelineMax': path.resolve('node_modules', 'gsap/src/uncompressed/TimelineMax.js'),
+      'ScrollMagic': path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/ScrollMagic.js'),
+      'animation.gsap': path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js')
     }
   },
 
@@ -66,7 +73,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|svg|gif)$/,
-        loader: 'file-loader?name=./img/[name]-[hash:6].[ext]',
+        loader: 'file-loader?name=./img/[name]-[hash:4].[ext]',
         include: path.join(__dirname, './src/assets/img')
       },
       {

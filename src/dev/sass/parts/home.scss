@@ -22,6 +22,15 @@
 				.last-name{
 					text-align: right;
 				}
+				&.shadowy{
+					font-size: 7.6em;
+					letter-spacing: 11.6px;
+					text-shadow: $grey 3px 3px, #ddd 4px 4px 5px;
+					@media screen and (max-width: 1650px) {
+						font-size: 6.6em;
+						letter-spacing: 10.6px;
+					}
+				}
 			}
 			.date{
 				text-align: right;
@@ -29,6 +38,9 @@
 				color: $grey;
 				letter-spacing: 2.5px;
 			}
+		}
+		.wrapper-intro{
+			display: inline-block;
 		}
 	}
 }

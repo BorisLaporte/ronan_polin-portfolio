@@ -6,7 +6,7 @@ import {setColor} from 'APP/Store/color/actions'
 import BackBlur from './back_blur'
 import Content from './content'
 import HoverColor from './hover_color'
-import Square from './square'
+import Square from './Square'
 
 class Work extends Component {
 	constructor(props){
@@ -17,21 +17,20 @@ class Work extends Component {
 	}
 
 	componentWillMount() {
-		const {data, params} = this.props
-		if ( data.title == params.name ){
+		const {data, actual,params} = this.props
+		if ( data[actual].title == params.name ){
 			this.setColor()
 		}
 	}
 
 	componentDidMount() {
-		console.log("mount")
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		const {data, isRouting, reduxRoute, reduxNextRoute} = this.props
+		const {isRouting, reduxRoute, kind} = this.props
 		if (
 				(!isRouting && nextProps.isRouting)
-				|| (reduxRoute != nextProps.reduxRoute)
+				|| (reduxRoute != nextProps.reduxRoute && kind=="projects")
 		){
 			return true
 		}
@@ -41,6 +40,7 @@ class Work extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		const {reduxNextRoute, isRouting, nextKind} = this.props
 		this.setColor()
+		// console.log(this.props)
 		if ( !isRouting ){
 			// console.log("entering")
 		} else {
@@ -53,9 +53,9 @@ class Work extends Component {
 	}
 
 	setColor(){
-		const {data, dispatch, color} = this.props
-		if ( color != data.color ){
-			dispatch(setColor(data.color))
+		const {data, actual, dispatch, color} = this.props
+		if ( color != data[actual].color ){
+			dispatch(setColor(data[actual].color))
 		}
 	}
 
@@ -76,23 +76,50 @@ class Work extends Component {
 		}
 	}
 
+	nextData(){
+		const {next, data} = this.props
+		if ( next != null ){
+			return {
+				nextBackBlur: data[next].backBlur,
+				nextThumbnail: data[next].thumbnail,
+				nextData: data[next]
+			}
+		} else {
+			return {
+				nextBackBlur: null,
+				nextThumbnail: null,
+				nextData: null
+			}
+		}
+	}
+
 	render() {
-		const {data, params, projectsSize} = this.props
+		const {data, actual, next, params, projects} = this.props
+		const {nextBackBlur, nextThumbnail, nextData} = this.nextData()
 		const event = this.isChanging()
 		return (
-			<div className={"fullscreen "+data.color} ref="main">
+			<div className={"fullscreen "+data[actual].color} ref="main">
 				<BackBlur 
-					img={data.backBlur} 
+					img={data[actual].backBlur} 
 					event={event}
+					next={nextBackBlur}
 				/>
-			
-				<HoverColor
-					thumbnail={data.thumbnail}
+				<Square 
+					data={data}
+					projects={projects}
 					event={event}
+					actual={actual}
+					next={next}
+				/>
+				<HoverColor
+					data={data[actual]}
+					event={event}
+					next={nextData}
 				/>
 				<Content 
-					data={data} 
+					data={data[actual]} 
 					event={event}
+					next={nextData}
 				/>
 			</div>
 		)
@@ -106,6 +133,7 @@ function mapStateToProps(state) {
 
   const {
     route: reduxRoute,
+    routeKind: kind,
     nextRoute: reduxNextRoute,
     nextRouteKind: nextKind,
     isRouting: isRouting,
@@ -121,6 +149,7 @@ function mapStateToProps(state) {
     reduxNextRoute,
     isRouting,
     nextKind,
+    kind,
     direction,
     color
   }

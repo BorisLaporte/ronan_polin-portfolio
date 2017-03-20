@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {withRouter, browserHistory} from 'react-router'
 import {connect} from 'react-redux'
 import {TimelineLite, TweenLite, Power2} from 'gsap'
+import {LANDSCAPE} from 'APP/Store/responsive/actions'
 
 class Next extends Component {
 	constructor(props){
@@ -9,7 +10,8 @@ class Next extends Component {
 		this.state = {
       tl: null,
       prefix: '/projects/',
-      sufix: '/detail'
+      sufix: '/detail',
+      reg: /detail$/
 		}
 
 		this.handleClick = this.handleClick.bind(this)
@@ -21,6 +23,14 @@ class Next extends Component {
 
   componentDidMount() {
 		this.enteringAnim()
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const {reg} = this.state
+    if ( reg.test(nextProps.location.pathname)){
+      return true
+    }
+    return false
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -50,28 +60,56 @@ class Next extends Component {
 	enteringAnim(){
     const {tl} = this.state
     const {main} = this.refs
+    const {orientation} = this.props
+    let tweenMain
+    if ( orientation == LANDSCAPE ){
+      tweenMain = new TweenLite.fromTo(main, 1,
+        {
+          opacity: 0,
+          x:10
+        },
+        {
+          opacity: 1,
+          x:0,
+          ease: Power2.easeOut
+        })
+    } else {
+      tweenMain = new TweenLite.fromTo(main, 1,
+        {
+          opacity: 0,
+          y:10
+        },
+        {
+          opacity: 1,
+          y:0,
+          ease: Power2.easeOut
+        })
+    }
     tl.clear()
-    tl.fromTo(main, 1,
-    {
-      opacity: 0,
-      y:10
-    },
-    {
-      opacity: 1,
-      y:0,
-      ease: Power2.easeOut
-    })
+    tl.add([tweenMain])
   }
 
   leavingAnim(callback = null){
     const {tl} = this.state
     const {main} = this.refs
-    const tweenMain = new TweenLite.to(main, 1,
-			{
-				opacity:0,
-				y:-30,
-				ease: Power2.easeOut
-			})
+    const {orientation} = this.props
+    let tweenMain
+    if ( orientation == LANDSCAPE ){
+      tweenMain = new TweenLite.to(main, 1,
+        {
+          opacity:0,
+          x:-30,
+          ease: Power2.easeOut
+        })
+    } else {
+      tweenMain = new TweenLite.to(main, 1,
+        {
+          opacity:0,
+          y:-30,
+          ease: Power2.easeOut
+        })
+    }
+    
     tl.clear()
     tl.add([tweenMain]).pause()
     if ( callback != null ){
@@ -94,10 +132,15 @@ class Next extends Component {
 function mapStateToProps(state) {
   const { contentReducer} = state
   const { navigationReducer} = state
+  const { responsiveReducer} = state
 
   const {
     items: data
   } = contentReducer
+
+  const {
+    orientation: orientation
+  } = responsiveReducer
 
   const {
     nextRoute: reduxNextRoute,
@@ -108,6 +151,7 @@ function mapStateToProps(state) {
 
   return {
     data,
+    orientation,
     reduxNextRoute,
     isRouting,
     kind,

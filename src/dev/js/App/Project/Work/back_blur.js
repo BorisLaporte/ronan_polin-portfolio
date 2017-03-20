@@ -34,7 +34,11 @@ class BackBlur extends Component {
 	handleAnimations(){
 		const {type, where, direction} = this.props.event
 		if ( type == "leaving" ){
-			this.leavingAnim()
+			if ( where == "projects" ){
+				this.switchAnim()
+			} else {
+				this.leaveAnim()
+			}
 		} else if ( type == "entering" ){
 			this.enterAnim(true)
 		}
@@ -43,42 +47,79 @@ class BackBlur extends Component {
 	enterAnim(isUpdate){
 		const {tl} = this.state
 		const {main} = this.refs
-		const {time, enteringDelay, updatingDelay} = this.props.timers.backBlur
-		const delay = isUpdate ? updatingDelay : enteringDelay
-		const tweenMain = new TweenLite.fromTo(main, time,
-			{
-				opacity:0
-			},
-			{
-				opacity:1,
-				ease: Power2.easeOut
-			})
 		tl.clear()
-		tl.add([tweenMain], delay)
+		if ( !isUpdate ){
+			const tweenMain = new TweenLite.fromTo(main, 0.6,
+				{
+					opacity:0
+				},
+				{
+					opacity:1,
+					ease: Power2.easeOut
+				})
+			tl.add([tweenMain], 0.4)
+		} else {
+			tl.set(main,{
+				opacity: 1
+			})
+		}
 
 	}
 
-	leavingAnim(){
+	switchAnim(){
 		const {tl} = this.state
 		const {main} = this.refs
 		const {time, leavingDelay} = this.props.timers.backBlur
-		const tweenMain = new TweenLite.to(main, time,
+		const tweenMain = new TweenLite.to(main, 0.6,
 			{
 				opacity:0,
 				ease: Power2.easeOut
 			})
 		tl.clear()
-		tl.add([tweenMain], leavingDelay)
+		tl.add([tweenMain], 1)
+	}
+
+	leaveAnim(){
+		const {tl} = this.state
+		const {main, next} = this.refs
+		const {time, leavingDelay} = this.props.timers.backBlur
+
+		tl.clear()
+		const tweenMain = new TweenLite.to(main, time,
+			{
+				opacity:0,
+				ease: Power2.easeOut
+			})
+		if ( next != null ){
+			const tweenNext = new TweenLite.to(next, time,
+				{
+					opacity:0,
+					ease: Power2.easeOut
+				})
+			tl.add([tweenMain, tweenNext], 0.4)
+		} else {
+			tl.add([tweenMain], 0.4)
+		}
 	}
 
 	render() {
-		const {img} = this.props
+		const {img, next} = this.props
 		return (
-			<div 
-				className={"fullscreen back-blur"} 
-				ref="main"
-				style={{backgroundImage: 'url('+require(	"IMG/"+img)+')' }}
-			>
+			<div>
+				{ (next != null) &&
+					<div 
+						className={"fullscreen back-blur"} 
+						ref="next"
+						style={{backgroundImage: 'url('+require(	"IMG/"+next)+')' }}
+					>
+					</div>
+				}
+				<div 
+					className={"fullscreen back-blur"} 
+					ref="main"
+					style={{backgroundImage: 'url('+require(	"IMG/"+img)+')' }}
+				>
+				</div>
 			</div>
 		)
 	}

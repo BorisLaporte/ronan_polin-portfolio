@@ -7,7 +7,6 @@ import Specs from './Specs'
 import MiseEnBouche from './MiseEnBouche'
 import Headline from './headline'
 import Team from './Team'
-import Description from './description'
 import PreMess from './PreMess'
 import TheMaze from './TheMaze'
 
@@ -17,8 +16,7 @@ class Body extends Component {
 		super(props)
 		this.state = {
 			tl: null,
-			scController: null,
-			scScene: null
+			scController: null
 		}
 	}
 
@@ -36,31 +34,11 @@ class Body extends Component {
 		}
 	}
 
-	// setScene(trigger){
-	// 	const {scController} = this.state
-	// 	new ScrollMagic.Scene({
-	// 			triggerElement: trigger
-	// 		})
-	// 		.addTo(scrollmagic)
-	// 		.on("update", function (e) {
-	// 			$("#scrollDirection").text(e.target.controller().info("scrollDirection"))
-	// 		})
-	// 		.on("enter leave", function (e) {
-	// 			$("#state").text(e.type == "enter" ? "inside" : "outside")
-	// 		})
-	// 		.on("start end", function (e) {
-	// 			$("#lastHit").text(e.type == "start" ? "top" : "bottom")
-	// 		})
-	// 		.on("progress", function (e) {
-	// 			$("#progress").text(e.progress.toFixed(3))
-	// 		})
-	// }
-
 	shouldComponentUpdate(nextProps, nextState) {
-		const {isRouting, reduxRoute, reduxNextRoute} = this.props
+		const {isRouting, reduxRoute, reduxNextRoute, kind} = this.props
 		if (
 				(!isRouting && nextProps.isRouting)
-				|| (reduxRoute != nextProps.reduxRoute)
+				|| ((reduxRoute != nextProps.reduxRoute) && kind == "detail")
 		){
 			return true
 		}
@@ -69,6 +47,7 @@ class Body extends Component {
 
   componentDidUpdate(prevProps, prevState) {
 		const {isRouting} = this.props
+		const {scController} = this.state
 		if ( isRouting ){
 			this.leavingAnim()
     } else {
@@ -101,7 +80,7 @@ class Body extends Component {
 				ease: Power2.easeOut
 			})
 		tl.clear()
-		tl.add([tweenMain], 0.1)
+		tl.add([tweenMain])
 	}
 
   isChanging(){
@@ -128,25 +107,50 @@ class Body extends Component {
 			specs, 
 			miseEnBouche, 
 			chapeau, 
-			team, 
-			description, 
+			team,
 			logo,
 			preMess,
 			theMaze
 		} = data
 		const event = this.isChanging()
+		const {scController} = this.state 
 		return (
 			<div className="page" ref="main">
 				<div className="body withBounds">
-					<Description data={description} />
-					<Logo img={logo} />
-					<Specs data={specs}/>
-					<MiseEnBouche data={miseEnBouche} />
-					<Headline text={chapeau} />
-					<PreMess data={preMess} />
+					<Logo 
+						event={event} 
+						img={logo} 
+					/>
+					<Specs 
+						event={event}
+						data={specs}
+					/>
+					<MiseEnBouche 
+						event={event}
+						controller={scController} 
+						data={miseEnBouche} 
+					/>
+					<Headline 
+						event={event}
+						text={chapeau} 
+					/>
+					<PreMess 
+						event={event}
+						data={preMess} 
+					/>
 				</div>
-				<TheMaze title={title} data={theMaze} />
-				{ (team.length > 0) && <Team data={team}/> }
+				<TheMaze 
+					event={event} 
+					controller={scController} 
+					title={title} 
+					data={theMaze} 
+				/>
+				{ (team.length > 0) 
+					&& 
+					<Team 
+						event={event}
+						data={team}
+					/> }
 			</div>
 		)
 	}

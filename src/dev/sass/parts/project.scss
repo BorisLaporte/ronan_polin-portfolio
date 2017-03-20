@@ -19,9 +19,23 @@
 
 		.title{
 			left: 65%;
+			@media screen and (max-width: 850px) {
+				left: 50%;
+			}
 		}
-		.intro{
+		.wrapper-intro{
 			left: 50%;
+			position: relative;
+			display: inline-block;
+			@media screen and (max-width: 850px) {
+				transform: translateX(-50%);
+			}
+
+			.intro{
+				@media screen and (max-width: 850px) {
+					margin: 50px 0;
+				}
+			}
 		}
 	}
 }

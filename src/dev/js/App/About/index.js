@@ -51,7 +51,7 @@ class About extends Component {
 		const {tl} = this.state
 		const {about} = this.refs
 		tl.clear()
-		const body = new TweenLite.to(about, 0.5,
+		const body = new TweenLite.to(about, 0.8,
 			{	
 				opacity: 0,
 				ease: Power2.easeOut,

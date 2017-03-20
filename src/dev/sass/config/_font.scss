@@ -3,6 +3,7 @@
   src: url('../../assets/font/Bariol-Bold.eot'); /* IE9+ Compat Modes */
   src: url('../../assets/font/Bariol-Bold.woff2') format('woff2'), /* Super modern browsers */
        url('../../assets/font/Bariol-Bold.woff') format('woff'), /* Modern browsers */
+       url('../../assets/font/Bariol-Bold.svg#svgFontName') format('svg'), /* Modern browsers */
        url('../../assets/font/Bariol-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 @font-face {
@@ -10,6 +11,7 @@
   src: url('../../assets/font/LinotypeUnivers-BasicBlack.eot'); /* IE9+ Compat Modes */
   src: url('../../assets/font/LinotypeUnivers-BasicBlack.woff2') format('woff2'), /* Super modern browsers */
        url('../../assets/font/LinotypeUnivers-BasicBlack.woff') format('woff'), /* Modern browsers */
+       url('../../assets/font/LinotypeUnivers-BasicBlack.svg#svgFontName') format('svg'), /* Modern browsers */
        url('../../assets/font/LinotypeUnivers-BasicBlack.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 @font-face {
@@ -17,6 +19,7 @@
   src: url('../../assets/font/LinotypeUnivers-BasicMedium.eot'); /* IE9+ Compat Modes */
   src: url('../../assets/font/LinotypeUnivers-BasicMedium.woff2') format('woff2'), /* Super modern browsers */
        url('../../assets/font/LinotypeUnivers-BasicMedium.woff') format('woff'), /* Modern browsers */
+       url('../../assets/font/LinotypeUnivers-BasicMedium.svg#svgFontName') format('svg'), /* Modern browsers */
        url('../../assets/font/LinotypeUnivers-BasicMedium.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 @font-face {
@@ -24,6 +27,7 @@
   src: url('../../assets/font/SabonLTStd-Italic.eot'); /* IE9+ Compat Modes */
   src: url('../../assets/font/SabonLTStd-Italic.woff2') format('woff2'), /* Super modern browsers */
        url('../../assets/font/SabonLTStd-Italic.woff') format('woff'), /* Modern browsers */
+       url('../../assets/font/SabonLTStd-Italic.svg#svgFontName') format('svg'), /* Modern browsers */
        url('../../assets/font/SabonLTStd-Italic.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 @font-face {
@@ -31,7 +35,16 @@
   src: url('../../assets/font/SabonLTStd-Roman.eot'); /* IE9+ Compat Modes */
   src: url('../../assets/font/SabonLTStd-Roman.woff2') format('woff2'), /* Super modern browsers */
        url('../../assets/font/SabonLTStd-Roman.woff') format('woff'), /* Modern browsers */
+       url('../../assets/font/SabonLTStd-Roman.svg#svgFontName') format('svg'), /* Modern browsers */
        url('../../assets/font/SabonLTStd-Roman.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: "SabonLTStd-Bold";
+  src: url('../../assets/font/SabonLTStd-Bold.eot'); /* IE9+ Compat Modes */
+  src: url('../../assets/font/SabonLTStd-Bold.woff2') format('woff2'), /* Super modern browsers */
+       url('../../assets/font/SabonLTStd-Bold.woff') format('woff'), /* Modern browsers */
+       url('../../assets/font/SabonLTStd-Bold.svg#svgFontName') format('svg'), /* Modern browsers */
+       url('../../assets/font/SabonLTStd-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 
 $bariol: 'Bariol-Bold';
@@ -39,3 +52,4 @@ $linoBlack: 'LinotypeUnivers-BasicBlack';
 $linoMedium: 'LinotypeUnivers-BasicMedium';
 $sabonItalic: 'SabonLTStd-Italic';
 $sabonRoman: 'SabonLTStd-Roman';
+$sabonBold: 'SabonLTStd-Bold';

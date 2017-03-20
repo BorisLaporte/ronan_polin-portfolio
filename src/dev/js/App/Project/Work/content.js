@@ -43,10 +43,8 @@ class Content extends Component {
 
 	enterAnim(isUpdate){
 		const {tl} = this.state
-		const {main} = this.refs
-		const {time, enteringDelay, updatingDelay} = this.props.timers.content
-		const delay = isUpdate ? updatingDelay : enteringDelay
-		const tweenMain = new TweenLite.fromTo(main, time,
+		const {main, intro, content, title} = this.refs
+		const tweenMain = new TweenLite.fromTo(main, 1,
 			{
 				opacity:0
 			},
@@ -54,22 +52,59 @@ class Content extends Component {
 				opacity:1,
 				ease: Power2.easeOut
 			})
+		const tweenTitle = new TweenLite.fromTo(title, 1,
+			{
+				x: -40+"%"
+			},
+			{
+				x: -50+"%",
+				ease: Power2.easeOut
+			})
+		const tweenIntro = new TweenLite.fromTo(intro, 1,
+			{
+				x: 100+"%"
+			},
+			{
+				x: 0+"%",
+				ease: Power2.easeOut
+			})
+		const tweenContent = new TweenLite.fromTo(content, 1,
+			{
+				x: -100+"%"
+			},
+			{
+				x: 0+"%",
+				ease: Power2.easeOut
+			})
 		tl.clear()
-		tl.add([tweenMain], delay)
-
+		tl.add([tweenMain, tweenTitle], 1.8).add([tweenContent, tweenIntro], "-=0.6")
 	}
 
 	leavingAnim(){
 		const {tl} = this.state
-		const {main} = this.refs
-		const {time, leavingDelay} = this.props.timers.content
-		const tweenMain = new TweenLite.to(main, time,
+		const {main, intro, content, title} = this.refs
+		const tweenMain = new TweenLite.to(main, 0.9,
 			{
 				opacity:0,
 				ease: Power2.easeOut
 			})
+		const tweenTitle = new TweenLite.to(title, 0.9,
+			{
+				x: -40+"%",
+				ease: Power2.easeOut
+			})
+		const tweenIntro = new TweenLite.to(intro, 0.9,
+			{
+				x: 100+"%",
+				ease: Power2.easeOut
+			})
+		const tweenContent = new TweenLite.to(content, 0.9,
+			{
+				x: -100+"%",
+				ease: Power2.easeOut
+			})
 		tl.clear()
-		tl.add([tweenMain], leavingDelay)
+		tl.add([tweenContent, tweenIntro, tweenTitle]).add([tweenMain], "-=0.6")
 	}
 
 	render() {
@@ -78,10 +113,12 @@ class Content extends Component {
 			<div className="name-project" ref="main">
 				<div className="in-middle">
 					<div className="title center" ref="title">{title}</div>
-					<div className="intro">
-						<div className="content">
-							<span className="line">{intro.part1}</span>
-							<span className="line">{intro.part2}</span>
+					<div className="wrapper-intro">
+						<div className="intro" ref="intro">
+							<div className="content" ref="content">
+								<span className="line">{intro.part1}&nbsp;</span>
+								<span className="line">{intro.part2}</span>
+							</div>
 						</div>
 					</div>
 				</div>

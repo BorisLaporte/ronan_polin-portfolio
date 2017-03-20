@@ -5,6 +5,7 @@ import {setColor, BLACK} from 'APP/Store/color/actions'
 
 import TitleIntro from './title_intro'
 import HoverColor from './hover_color'
+import Description from './description'
 
 class Header extends Component {
 	constructor(props){
@@ -22,7 +23,10 @@ class Header extends Component {
 	}
 
 	componentDidMount() {
-		this.setScene()
+		const {comingFrom} = this.props
+		if ( comingFrom == "detail" ){
+			this.setScene()
+		}
 	}
 
 	setScene(){
@@ -69,7 +73,9 @@ class Header extends Component {
 
 	componentWillUnmount() {
 		const {dispatch} = this.props
+		const {scScene} = this.state
 		dispatch(setColor(BLACK))
+		scScene.destroy()
 	}
 
   isChanging(){
@@ -90,12 +96,13 @@ class Header extends Component {
 	}
 
 	render() {
-		const {title, intro, thumbnail, color} = this.props.data
+		const {title, intro, thumbnail, color, description} = this.props.data
 		const event = this.isChanging()
 		return (
 			<div className="header" ref="main">
 				<HoverColor event={event} thumbnail={thumbnail} />
 				<TitleIntro event={event} title={title} intro={intro} color={color} />
+				<Description event={event} data={description} />
 			</div>
 		)
 	}

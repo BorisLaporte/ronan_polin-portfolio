@@ -21,8 +21,17 @@ class About extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if ( nextProps.isRouting && nextProps.nextKind == "about" ){
-      this.leavingAnim()
+    const {kind} = this.props
+    if ( nextProps.isRouting ){
+      if ( nextProps.nextKind == "about" ){
+        this.leavingAnim()
+      } else if (kind == "projects" && nextProps.nextKind == "detail") {
+        this.slidingDetailAnim()
+      } else if (kind == "detail" && nextProps.nextKind == "projects") {
+        this.slidingProjectsAnim()
+      } else if ( nextProps.nextKind != "home"){
+        this.leaginLookingFor()
+      }
     }
   }
 
@@ -37,6 +46,33 @@ class About extends Component {
     this.leavingAnim(() => {
 			browserHistory.push(to)
     })
+  }
+
+  slidingDetailAnim(){
+    const {tl} = this.state
+    const {container} = this.refs
+    const tweenContainer = new TweenLite.to(container, 0.8,
+      {
+        left: 100+'%',
+        x: -100+'%',
+        ease: Power2.easeInOut
+      })
+    tl.clear()
+    tl.add([tweenContainer], 1)
+  }
+
+  slidingProjectsAnim(){
+    const {tl} = this.state
+    const {container} = this.refs
+
+    const tweenContainer = new TweenLite.to(container, 0.8,
+      {
+        left: 50+'%',
+        x: -50+'%',
+        ease: Power2.easeInOut
+      })
+    tl.clear()
+    tl.add([tweenContainer])
   }
 
   enteringAnim(){
@@ -99,12 +135,27 @@ class About extends Component {
     tl.play()
   }
 
+  leaginLookingFor(){
+    const {tl} = this.state
+    const {looking} = this.refs
+
+    const tweenLooking = new TweenLite.to(looking, 0.8,
+      {
+        x: 30,
+        opacity: 0,
+        ease: Power2.easeInOut
+      })
+    tl.clear()
+    tl.add([tweenLooking])
+  }
+
 	render() {
 		const {to} = this.state
+    const {kind} = this.props
 		return (
 			<a href={to} ref="container" onClick={this.handleClick} className="link about" >
 				<div ref="title" >.about</div>
-				<div ref="looking" className="looking-for">looking for a 6 month internship...</div>
+				<div ref="looking" className="looking-for">{(kind == "home") && "looking for a 6 month internship..."}</div>
 			</a>
 		)
 	}

@@ -5,7 +5,7 @@ export default function responsiveReducer(state = {
   height: 0,
   orientation: LANDSCAPE,
   thumbnailSize: 0,
-  squareSize: 0
+  thumbnailFinalSize: 0
 }, action) {
   switch (action.type) {
     case RESIZING:
@@ -14,7 +14,7 @@ export default function responsiveReducer(state = {
         height: action.height,
         orientation: action.orientation,
         thumbnailSize: action.thumbnailSize,
-        squareSize: action.squareSize
+        thumbnailFinalSize: action.thumbnailFinalSize
       })
     default:
       return state

@@ -1,6 +1,5 @@
 #menu{
   .about{
-    transition: color 0.2s ease-in-out, left 1.4s ease-out, transform 1.4s ease-out !important;
     .looking-for{
       position: absolute;
       font-family: $sabonItalic;
@@ -9,22 +8,35 @@
       left: 20px;
       margin-top: 10px;
       white-space: nowrap;
+      @media screen and (max-width: 1200px) {
+        display: none;
+      }
       // color: $darkGrey;
     }
   }
   .next{
     float: right;
     text-align: right;
+    margin-bottom: 45px; 
     @media screen and (max-width: 900px) {
       float: initial;
       text-align: center;
       width: 100%;
+      .shadowy{
+        display: inline-block;
+        left: 50%;
+        position: relative;
+        transform: translateX(-50%);
+      }
     }
   }
   .top{
     top: 0;
     position: fixed;
     padding: 45px 100px;
+    @media screen and (max-width: 1650px) {
+      padding: 25px 100px;
+    }
     @media screen and (max-width: 600px) {
       padding: 25px 30px;
     }
@@ -57,8 +69,11 @@
     bottom: 0;
     position: absolute;
     padding: 45px 100px;
-    @media screen and (max-width: 600px) {
-      padding: 25px 0px;
+    @media screen and (max-width: 1650px) {
+      padding: 25px 100px;
+    }
+    @media screen and (max-width: 900px) {
+      padding: 25px 30px;
     }
 
     .link{
@@ -98,6 +113,10 @@
       justify-content: center;
       align-items: center;
       will-change: opacity, transform;
+      @media screen and (max-width: 1650px) {
+        width: 40px;
+        min-height: 25px;
+      }
 
       &:hover, &.active{
         opacity: 1;
@@ -109,6 +128,10 @@
         height: 3px;
         border-radius: 1px;
         margin-top: 8px;
+        @media screen and (max-width: 1650px) {
+          margin-top: 5px;
+          height: 2px;
+        }
 
       }
       &.n-0{

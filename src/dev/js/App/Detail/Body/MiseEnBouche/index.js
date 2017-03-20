@@ -5,10 +5,11 @@ import BundleText from './bundle_text'
 
 class MiseEnBouche extends Component {
 	render() {
-		const {imgContext, whatIs, quote} = this.props.data
+		const {data, controller} = this.props
+		const {imgContext, whatIs, quote} = data
 		return (
 			<div className="mise-en-bouche" >
-				<BundleImg imgs={imgContext} />
+				<BundleImg imgs={imgContext} controller={controller} />
 				<BundleText whatIs={whatIs} quote={quote}/>
 			</div>
 		)

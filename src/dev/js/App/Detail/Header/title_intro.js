@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import {connect} from 'react-redux'
+import {LANDSCAPE} from 'APP/Store/responsive/actions'
 
 class TitleIntro extends Component {
 	constructor(props){
@@ -15,7 +17,9 @@ class TitleIntro extends Component {
 
 	componentDidMount() {
 		const {comingFrom} = this.props.event
-		if (comingFrom == "detail"){
+		if (comingFrom == "projects"){
+			this.enterAnim(true)
+		} else {
 			this.enterAnim(false)
 		}
 	}
@@ -41,13 +45,19 @@ class TitleIntro extends Component {
 		if ( type == "leaving" ){
 			this.leavingAnim()
 		} else if ( type == "entering" ){
-			this.enterAnim(true)
+			if ( comingFrom == "projects" ){
+				this.enterAnim(true)
+			} else {
+				this.enterAnim(false)
+			}
 		}
 	}
 
-	enterAnim(isUpdate){
+	enterAnim(fromDetail){
 		const {tl} = this.state
-		const {main} = this.refs
+		const {main, intro, content, title} = this.refs
+		const {orientation} = this.props
+		const delay = fromDetail ? 0.5 : 1.5
 		const tweenMain = new TweenLite.fromTo(main, 1,
 			{
 				opacity:0
@@ -56,20 +66,72 @@ class TitleIntro extends Component {
 				opacity:1,
 				ease: Power2.easeOut
 			})
+		const tweenTitle = new TweenLite.fromTo(title, 1,
+			{
+				y: -20
+			},
+			{
+				y: 0,
+				ease: Power2.easeOut
+			})
+		let tweenIntro
+		if ( orientation == LANDSCAPE ){
+			tweenIntro = new TweenLite.fromTo(intro, 1,
+				{
+					x: 100+"%"
+				},
+				{
+					x: 0+"%",
+					ease: Power2.easeOut
+				})
+		} else {
+			tweenIntro = new TweenLite.fromTo(intro, 1,
+				{
+					x: 100+"%"
+				},
+				{
+					x: -50+"%",
+					ease: Power2.easeOut
+				})
+		}
+		
+		const tweenContent = new TweenLite.fromTo(content, 1,
+			{
+				x: -100+"%"
+			},
+			{
+				x: 0+"%",
+				ease: Power2.easeOut
+			})
 		tl.clear()
-		tl.add([tweenMain], 1)
+		tl.add([tweenMain, tweenTitle], delay).add([tweenContent, tweenIntro], "-=0.4")
 	}
 
 	leavingAnim(){
 		const {tl} = this.state
-		const {main} = this.refs
+		const {main, intro, content, title} = this.refs
 		const tweenMain = new TweenLite.to(main, 1,
 			{
 				opacity:0,
 				ease: Power2.easeOut
 			})
+		const tweenTitle = new TweenLite.to(title, 1,
+			{
+				y: -20,
+				ease: Power2.easeOut
+			})
+		const tweenIntro = new TweenLite.to(intro, 1,
+			{
+				x: 100+"%",
+				ease: Power2.easeOut
+			})
+		const tweenContent = new TweenLite.to(content, 1,
+			{
+				x: -100+"%",
+				ease: Power2.easeOut
+			})
 		tl.clear()
-		tl.add([tweenMain], 0.1)
+		tl.add([tweenContent, tweenIntro, tweenTitle]).add([tweenMain], "-=0.6")
 	}
 
 	render() {
@@ -78,10 +140,14 @@ class TitleIntro extends Component {
 			<div className={"name-project "+color} ref="main">
 				<div className="in-middle">
 					<div className="title" ref="title">{title}</div>
-					<div className="intro">
-						<div className="content">
-							<span className="line">{intro.part1}</span>
-							<span className="line">{intro.part2}</span>
+					<div className="wrapper-intro">
+						<div className="container-intro">
+							<div className="intro" ref="intro">
+								<div className="content" ref="content">
+									<span className="line">{intro.part1}&nbsp;</span>
+									<span className="line">{intro.part2}</span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -96,4 +162,18 @@ TitleIntro.propTypes = {
 	color: PropTypes.string.isRequired
 }
 
-export default TitleIntro
+
+function mapStateToProps(state) {
+  const { responsiveReducer} = state
+
+  const {
+    orientation: orientation
+  } = responsiveReducer
+
+  return {
+    orientation
+  }
+}
+
+
+export default connect(mapStateToProps)(TitleIntro)

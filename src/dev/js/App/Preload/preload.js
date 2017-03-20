@@ -8,15 +8,15 @@ export default class Prelaod {
     this.imgDone = []
     this.timeout = this.safetyTimeout(limitTime)
     this.loadImages(img)
-    this.updateStatus = this.updateStatus.bind(this)
   }
 
   loadImages(imgArray){
     let images = []
     for (var i=0; i < this.imgToDownload.length; i++){
         images[i] = new Image()
-        images[i].src = require("IMG/"+imgArray[i])
-        images[i].addEventListener('load', this.updateStatus(images[i]))
+        images[i].onload = this.updateStatus.bind(this, images[i])
+        const src = require("IMG/"+imgArray[i])
+        images[i].src = src
     }
   }
 

@@ -37,10 +37,11 @@ class Projects extends Component {
     if ( nextProps.isRouting && nextProps.nextKind == "projects" ){
       const name = nextProps.reduxNextRoute.substring(nextProps.reduxNextRoute.lastIndexOf("/") + 1)
       this.state.forceActive = name
-    } else if ( !nextProps.isRouting ){
-      this.state.forceActive = false
     } else if ( nextProps.isRouting && nextProps.nextKind == "detail"){
       this.leavingAnim()
+    }
+    if ( nextProps.isRouting && nextProps.nextKind != "projects" ){
+      this.state.forceActive = false
     }
   }
   

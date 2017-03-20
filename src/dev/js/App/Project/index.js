@@ -6,7 +6,6 @@ import {setColor, BLACK} from 'APP/Store/color/actions'
 import {itWillPush, DID_PUSH} from 'APP/Store/navigation/actions'
 
 import Work from './Work'
-import Square from './Work/square'
 
 class Project extends Component {
   constructor(props){
@@ -17,6 +16,7 @@ class Project extends Component {
       index: 0,
       isScrolling: false,
       readyForNext: false,
+      nextName: null,
       timeout: null,
       prefix: "/projects/",
       reg: /^\/projects\/[a-zA-Z0-9]*\/?$/,
@@ -57,10 +57,10 @@ class Project extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {isRouting, nextRouteKind} = this.props
-    if ( isRouting && nextRouteKind != "projects"){
-      // const index = this.getIndex()
-      // this.scrollAnimation(index) 
+    const {isRouting, nextRouteKind, data, reduxNextRoute} = this.props
+    if ( isRouting ){
+      const nextName = reduxNextRoute.substring(reduxNextRoute.lastIndexOf('/') + 1)
+      this.setState({nextName: nextName})
     }
   }
 
@@ -97,6 +97,11 @@ class Project extends Component {
     let actualIndex = this.getIndex()
     let nextIndex = this.getIndex(path)
     let direction = nextIndex - actualIndex
+    if ( direction == 2 ){
+      direction = -1
+    } else if ( direction == -2 ){
+      direction = 1
+    }
     return direction
   }
 
@@ -128,15 +133,6 @@ class Project extends Component {
     }
   }
 
-  // setInitScroll(index){
-  //   const {tl} = this.state
-  //   const {scroll} = this.refs
-  //   tl.set(scroll,
-  //     {
-  //       y: index * -100+"%"
-  //     })
-  // }
-
   scrollToNext(nextIndex){
     const {data, timers} = this.props
     const {prefix, scrollTime, scroll} = this.state
@@ -147,7 +143,7 @@ class Project extends Component {
     clearTimeout(scroll)
     this.state.scroll = setTimeout(function() {
       self.setState({isScrolling: false})
-    }, timers.allLeavingTime * 500 )
+    }, 800 )
   }
 
   routerWillLeave(nextLocation) {
@@ -159,11 +155,13 @@ class Project extends Component {
       return true
     } else if ( reg.test(nextLocation.pathname) ) {
       const direction = this.getDirection(nextLocation.pathname)
+      const nextName = nextLocation.pathname.substring(nextLocation.pathname.lastIndexOf('/') + 1)
+      this.setState({nextName: nextName})
       dispatch(itWillPush(nextLocation.pathname, "projects", direction))
       clearTimeout(timeout)
       this.state.timeout = setTimeout(function() {
         self.setAndGo(nextLocation.pathname)
-      }, (timers.allLeavingTime * 600))
+      }, 1300)
       return false
     } else {
       dispatch(itWillPush(nextLocation.pathname, "projects"))
@@ -171,7 +169,7 @@ class Project extends Component {
       window.removeEventListener('wheel', this.onScroll)
       this.state.timeout = setTimeout(function() {
         self.setAndGo(nextLocation.pathname)
-      }, (timers.allLeavingTime * 1000))
+      }, (1400))
       return false
     }
   }
@@ -208,13 +206,12 @@ class Project extends Component {
   }
 
 	render() {
+    const {nextName} = this.state
 		const {projects, details} = this.props.data
     const {name} = this.props.params
-    const actualWork = details[name]
-    const leaving = this.isLeaving()
 		return (
       <div id="project" className="sub-wrapper fullscreen hidden" ref="main">
-        <Work data={actualWork} projectsSize={projects.length} />
+        <Work data={details} actual={name} next={nextName} projects={projects}/>
       </div>
 		)
 	}

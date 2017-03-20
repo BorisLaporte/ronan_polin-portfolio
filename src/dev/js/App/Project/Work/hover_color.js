@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {TimelineLite, TweenLite, Power2} from 'gsap'
 import {connect} from 'react-redux'
 import {withRouter, browserHistory} from 'react-router'
+import Hammer from 'hammerjs'
 import {PORTRAIT, LANDSCAPE} from 'APP/Store/responsive/actions'
 
 class HoverColor extends Component {
@@ -10,8 +11,8 @@ class HoverColor extends Component {
 
 		this.state = {
 			tl: null,
-			isDragging: false,
 			didEnter: false,
+			isDragging: false,
 			prefix: "/projects/",
 			defaultPos: {
 				xPos: 0,
@@ -26,10 +27,6 @@ class HoverColor extends Component {
 		this.handleClick = this.handleClick.bind(this)
 		this.thumbnailSetPos = this.thumbnailSetPos.bind(this)
 		this.thumbnailGoTo = this.thumbnailGoTo.bind(this)
-
-		this.onDrag = this.onDrag.bind(this)
-		this.onDragStart = this.onDragStart.bind(this)
-		this.onDragEnd = this.onDragEnd.bind(this)
 	}
 
 	componentWillMount() {
@@ -37,18 +34,27 @@ class HoverColor extends Component {
 	}
 
 	componentDidMount() {
-		this.init()
-		// this.enterAnim(1)
-		
+		this.update()
+		this.initHammer()
+		this.disableNativeDragAndDrop()
+	}
+
+	disableNativeDragAndDrop(){
+		document.addEventListener('dragstart', function(e){
+			e.preventDefault()
+			return false
+		})
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		const {event, thumbnail} = this.props
+		const {event, thumbnail, rWidth, orientation} = this.props
 		const {defaultPos} = this.state
 		if ( 
 			nextProps.event != event 
 			|| thumbnail != nextProps.thumbnail
 			|| defaultPos != nextState.defaultPos
+			|| rWidth != nextProps.rWidth
+			|| orientation != nextProps.orientation
 		){
 			return true
 		}
@@ -56,7 +62,23 @@ class HoverColor extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		this.handleAnimations()
+		const {event, rWidth, orientation} = this.props
+		const {didEnter, defaultPos} = this.state
+		if ( prevProps.event != event ){
+			this.handleAnimations()
+		} else if (
+			rWidth != prevProps.rWidth 
+			|| orientation != prevProps.orientation
+		) {
+			this.update()
+		} else if (defaultPos != prevState.defaultPos 
+			&& 
+			!didEnter
+			) {
+			this.enterAnim(false, 1)
+			this.setState({didEnter: true})
+		}
+		// }
 	}
 
 	handleAnimations(){
@@ -93,79 +115,89 @@ class HoverColor extends Component {
 		this.reset()
 	}
 
-	init(){
-		const {thumbnail} = this.refs
-		const {xPos, yPos} = this.thumbnailDefaultPos()
-		this.setState({defaultPos: {xPos: xPos, yPos: yPos}})
-		this.thumbnailSetPos(xPos, yPos)
-
-		thumbnail.addEventListener('dragstart', this.onDragStart)
-		thumbnail.addEventListener('drag', this.onDrag)
-		thumbnail.addEventListener('dragend', this.onDragEnd)
-	}
-
 	update(){
 		const {tl} = this.state
 		const {thumbnail} = this.refs
 		const {thumbnailSize} = this.props
 		const {xPos, yPos} = this.thumbnailDefaultPos()
-		this.setState(defaultPos: {xPos: xPos, yPos: yPos})
 		this.thumbnailSetPos(xPos, yPos)
-		tl.set(thumbnail, 
-			{
-				width: thumbnailSize,
-				height: thumbnailSize
-			})
+		this.thumbnailSetSize(thumbnailSize)
+		this.setState({defaultPos: {xPos: xPos, yPos: yPos}})
 	}
 
 	reset(){
 		const {thumbnail} = this.refs
-		thumbnail.removeEventListener('dragstart', this.onDragStart)
-		thumbnail.removeEventListener('drag', this.onDrag)
-		thumbnail.removeEventListener('dragend', this.onDragEnd)
 	}
 
-	onDragStart(e){
+	initHammer(){
+		const self = this
+		const {tl} = this.state
+		const {thumbnail, colorImg} = this.refs
+		const mc = new Hammer.Manager(thumbnail, {
+			recognizers: [
+				[Hammer.Pan,{ direction: Hammer.DIRECTION_ALL }]
+			]})
+		mc.on('panend pancancel panstart panmove', function(e){
+			tl.clear()
+			switch(e.type){
+				case "panend":
+				case "pancancel":
+					self.hammerEnd(e)
+					break
+				case "panstart":
+					self.hammerStart(e)
+					break
+				case "panmove":
+					self.hammerMove(e)
+					break
+				default:
+					break
+			}
+		})
+	}
+
+	hammerStart(e){
 		const {thumbnail} = this.refs
 		const {x, y} = thumbnail._gsTransform
-		const {clientX, clientY} = e
+		const {deltaX, deltaY} = e
 		this.setState(
 			{
 				mouse: 
 				{
-					mouseX: clientX - x, 
-					mouseY: clientY - y
+					mouseX: deltaX - x, 
+					mouseY: deltaY - y
 				},
 				isDragging: true
 			})
 	}
 
-	onDrag(e){
+	hammerMove(e){
 		e.preventDefault()
 		const {mouseX, mouseY} = this.state.mouse
-		const centerX = e.clientX - mouseX
-		const centerY = e.clientY - mouseY
-		if ( e.clientX != 0 && e.clientY != 0 ){
-			this.thumbnailSetPos(centerX , centerY)
-		}
+		const centerX = e.deltaX - mouseX
+		const centerY = e.deltaY - mouseY
+		this.thumbnailSetPos(centerX , centerY)
 	}
 
-	onDragEnd(e){
+
+	hammerEnd(e){
 		e.preventDefault()
+		const self = this
 		const {xPos, yPos} = this.state.defaultPos
 		this.thumbnailGoTo(xPos,yPos,0.5)
-		this.setState({isDragging: false})
+		setTimeout(function() {
+			self.setState({isDragging: false})
+		}, 0)
 	}
 
 	thumbnailDefaultPos(){
-		const {innerWidth, innerHeight} = window
-		const {orientation, thumbnailSize} = this.props
-		const yPos =  (innerHeight/2) - (thumbnailSize/2)
+		const {orientation, thumbnailSize,rWidth, rHeight} = this.props
+		const yPos =  (rHeight/2) - (thumbnailSize/2)
 		let xPos
 		if ( orientation == LANDSCAPE ){
-			xPos =  (innerWidth/2) - (thumbnailSize + 40)
+			xPos =  (rWidth/2) - (thumbnailSize + 40)
 		} else {
-			xPos =  innerWidth/2 - thumbnailSize
+			xPos =  rWidth/2 - thumbnailSize
 		}
 		return {xPos: xPos, yPos: yPos}
 	}
@@ -177,13 +209,13 @@ class HoverColor extends Component {
 			{
 				x: xPos+"px",
 				y: yPos+"px",
-				ease: Power2.easeOut
+				ease: Power2.easeInOut
 			})
 		const tweenImg = new TweenLite.to(colorImg, time,
 			{
 				x: -xPos+"px",
 				y: -yPos+"px",
-				ease: Power2.easeOut
+				ease: Power2.easeInOut
 			})
 			tl.clear()
 			tl.add([tweenThumbnail, tweenImg])
@@ -195,7 +227,7 @@ class HoverColor extends Component {
 	thumbnailSetPos(xPos, yPos){
 		const {tl} = this.state
 		const {thumbnail, colorImg} = this.refs
-		tl.clear()
+		// tl.clear()
 		tl.set(thumbnail,
 			{
 				x: xPos+"px",
@@ -207,52 +239,61 @@ class HoverColor extends Component {
 			})
 	}
 
+	thumbnailSetSize(size){
+		const {tl} = this.state
+		const {thumbnail} = this.refs
+		tl.clear()
+		tl.set(thumbnail,
+			{
+				width: size+"px",
+				height: size+"px"
+			})
+	}
+
 	handleClick(e){
 		e.preventDefault()
-		const {location, kind, isRouting} = this.props
-		if ( !isRouting ){
-			browserHistory.push(location.pathname+"/detail")
+		const {isDragging} = this.state
+		const {data, kind, isRouting} = this.props
+		if ( !isRouting && !isDragging ){
+			browserHistory.push("/projects/"+data.title+"/detail")
 		}
 	}
 
 	enterAnim(isUpdate, direction){
 		const {tl, defaultPos} = this.state
-		const {thumbnailSize} = this.props
-		const {innerHeight} = window
+		const {thumbnailSize, rHeight} = this.props
 		const {thumbnail, colorImg, main} = this.refs
 		const {time, enteringDelay, updatingDelay} = this.props.timers.hoverColor
-		const delay = isUpdate ? updatingDelay : enteringDelay
-
+		const delay = isUpdate ? 0.3 : 1.3
 		let pos
 		if ( direction < 0 ){
 			pos = -thumbnailSize
 		} else {
-			pos = innerHeight
+			pos = rHeight
 		}
-
-		const tweenThumbnail = new TweenLite.fromTo(thumbnail, time,
+		const tweenThumbnail = new TweenLite.fromTo(thumbnail, 1,
 			{
 				y: pos
 			},
 			{
 				y: defaultPos.yPos,
-				ease: Power2.easeOut
+				ease: Power2.easeInOut
 			})
-		const tweenImg = new TweenLite.fromTo(colorImg, time,
+		const tweenImg = new TweenLite.fromTo(colorImg, 1,
 			{
 				y: -pos
 			},
 			{
 				y: -(defaultPos.yPos),
-				ease: Power2.easeOut
+				ease: Power2.easeInOut
 			})
-		const tweenMain = new TweenLite.fromTo(main, time,
+		const tweenMain = new TweenLite.fromTo(main, 1,
 			{
 				opacity:0
 			},
 			{
 				opacity:1,
-				ease: Power2.easeOut
+				ease: Power2.easeInOut
 			})
 		tl.clear()
 		tl.add([tweenThumbnail, tweenMain, tweenImg], delay)
@@ -261,8 +302,7 @@ class HoverColor extends Component {
 
 	leavingAnim(direction){
 		const {tl, defaultPos} = this.state
-		const {thumbnailSize} = this.props
-		const {innerHeight} = window
+		const {thumbnailSize, rHeight} = this.props
 		const {thumbnail, colorImg, main} = this.refs
 		const {time, leavingDelay} = this.props.timers.hoverColor
 
@@ -270,78 +310,76 @@ class HoverColor extends Component {
 		if ( direction > 0 ){
 			pos = -thumbnailSize
 		} else {
-			pos = innerHeight
+			pos = rHeight
 		}
 
-		const tweenThumbnail = new TweenLite.to(thumbnail, time,
+		const tweenThumbnail = new TweenLite.to(thumbnail, 1,
 			{
 				y: pos,
 				ease: Power2.easeIn
 			})
-		const tweenImg = new TweenLite.to(colorImg, time,
+		const tweenImg = new TweenLite.to(colorImg, 1,
 			{
 				y: -pos,
 				ease: Power2.easeIn
 			})
-		const tweenMain = new TweenLite.to(main, time,
+		const tweenMain = new TweenLite.to(main, 1,
 			{
 				opacity:0,
 				ease: Power2.easeIn,
 			})
 		tl.clear()
-		tl.add([tweenThumbnail, tweenMain, tweenImg], leavingDelay)
+		tl.add([tweenThumbnail, tweenMain, tweenImg], 0.3)
 	}
 
 	leavingAnimDetail(){
 		const {tl} = this.state
-		const {innerWidth} = window
+		const {rWidth, thumbnailFinalSize} = this.props
 		const {main, thumbnail, colorImg, seeMore} = this.refs
 		const {time, leavingDelay} = this.props.timers.hoverColor
-		let finalSize = 700
-		if ( innerWidth <= 900 ){
-			finalSize = 600
-		}
-		const tweenThumbnail = new TweenLite.to(thumbnail, time,
+
+		const tweenThumbnail = new TweenLite.to(thumbnail, 1,
 			{
 				x:0,
 				y:0,
 				width: 100+"%",
-				height: finalSize+"px",
-				ease: Power2.easeOut
+				height: thumbnailFinalSize+"px",
+				ease: Power2.easeInOut
 			})
-		const tweenImg = new TweenLite.to(colorImg, time,
+		const tweenImg = new TweenLite.to(colorImg, 1,
 			{
 				x:0,
 				y:0,
-				ease: Power2.easeOut
+				ease: Power2.easeInOut
 			})
-		const tweenSeeMore = new TweenLite.to(seeMore, time,
+		const tweenSeeMore = new TweenLite.to(seeMore, 1,
 			{
 				opacity:0,
-				ease: Power2.easeOut
+				ease: Power2.easeInOut
 			})
 		tl.clear()
-		tl.add([tweenThumbnail, tweenImg, tweenSeeMore], leavingDelay)
+		tl.add([tweenThumbnail, tweenImg, tweenSeeMore], 0.3)
 	}
 
 	
 
 	render() {
-		const {thumbnail} = this.props
+		const {thumbnail} = this.props.data
 		return (
 			<div 
 				className="fullscreen" 
 				ref="main"
+				draggable="false"
 			>
 				<a 
 					href="#" 
 					ref="thumbnail" 
 					className="thumbnail"
-					draggable="true"
+					draggable="false"
 					onClick={this.handleClick}
 				>
-					<img ref="colorImg" src={require("IMG/"+thumbnail)} alt=""/>
-					<div ref="seeMore" className="see-more">.see-more</div>
+					<img ref="colorImg" draggable="false" src={require("IMG/"+thumbnail)}/>
+					<div ref="seeMore" draggable="false" className="see-more">.see-more</div>
 				</a>
 			</div>
 		)
@@ -369,8 +407,11 @@ function mapStateToProps(state) {
 
 
   const {
+		width: rWidth,
+		height: rHeight,
 		orientation: orientation,
-		thumbnailSize: thumbnailSize
+		thumbnailSize: thumbnailSize,
+		thumbnailFinalSize: thumbnailFinalSize
   } = responsiveReducer
 
   return {
@@ -382,7 +423,10 @@ function mapStateToProps(state) {
     nextDirection,
     thumbnailSize,
     orientation,
-    timers
+    rWidth,
+    rHeight,
+    timers,
+    thumbnailFinalSize
   }
 }
 

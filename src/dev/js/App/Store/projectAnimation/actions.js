@@ -21,7 +21,7 @@ export function setupTimers(){
         time: 0.5
       },
       hoverColor: {
-        time: 1.2
+        time: 0.8
       },
       square: {
         time: 0.3
@@ -31,7 +31,7 @@ export function setupTimers(){
       }
     }
 
-    const shortner = 0.2
+    const shortner = 0.4
     let allEnteringTime = 0
     let allLeavingTime = 0
     for(let i = 0; i < order.length; i++){

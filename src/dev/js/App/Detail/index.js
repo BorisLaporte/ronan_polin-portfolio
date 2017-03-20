@@ -60,7 +60,7 @@ class Detail extends Component {
 			clearTimeout(timeout)
 			const newTimeout = setTimeout(function() {
 				self.setAndGo(nextLocation.pathname)
-			}, 2000)
+			}, 1500)
 			this.setState({timeout: newTimeout})
 			return false
 		}

@@ -51,7 +51,7 @@
 
 .black{
 	color: #000;
-	&.square{
+	.square{
 		border-color: #000 !important;
 	}
 	.chinese-string{
@@ -64,7 +64,7 @@
 
 .white{
 	color: #fff;
-	&.square{
+	.square{
 		border-color: #fff !important;
 	}
 	.chinese-string{
