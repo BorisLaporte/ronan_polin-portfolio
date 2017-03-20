@@ -12,15 +12,15 @@
 		"links": [
 			{
 				"name": "dribbble",
-				"url": "#"
+				"url": "https://dribbble.com/ronanp"
 			},
 			{
 				"name": "behance",
-				"url": "#"
+				"url": "https://www.behance.net/ronan_p"
 			},
 			{
 				"name": "linkedin",
-				"url": "#"
+				"url": "https://www.linkedin.com/in/ronanpolin"
 			}
 		],
 		"details": {
@@ -52,21 +52,21 @@
 			"color": "white",
 			"square": "top",
 			"intro": {
-				"part1": "a social platform ",
-				"part2": "& marketplace in fashion"
+				"part1": "social shopping where customers",
+				"part2": "become influencers"
 			},
 			"next": "phoenix",
 			"index": 0,
 			"thumbnail": "pictures/reetags.jpg",
 			"backBlur": "pictures/reetags_blur.jpg",
 			"description": {
-				"part1": "A cross between a social network and an e-commerce platform, Reetags gives you the opportunity to share, post or comment the latest fashionable clothes of the community. Users are both sellers and clients. They are able to buy what they like and sell what they share.",
-				"part2": " ",
+				"part1": "Purchase the latest trends and shares it to earn money.",
+				"part2": " Between a social network and a marketplace, Reetags transform customers into ambassadors of a brand. Users become influencers and share their products with their follower community.",
 				"link": null
 			},
 			"logo": "Reetags/logo.png",
 			"specs": {
-				"role": "ui|ux designer",
+				"role": "ux|ui designer",
 				"time": "1 month",
 				"context": "freelance"
 			},
@@ -169,7 +169,7 @@
 			"color": "black",
 			"square": "middle",
 			"intro": {
-				"part1": "a medical help ",
+				"part1": "a medical help",
 				"part2": "against addiction"
 			},
 			"next": "lipsty",
@@ -179,10 +179,7 @@
 			"description": {
 				"part1": "Phoenix empowers patients in real time and helps decreasing or stopping their addiction.",
 				"part2": "Used between two consultations, its main target is the management of craving, without being specific to a product or a behavior. Targeted questions help to find the most appropriate strategy and allows the doctor to monitor the patient more thoroughly.",
-				"link": {
-					"text": "see the website",
-					"url": "#"
-				}
+				"link": null
 			},
 			"logo": "Phoenix/logo.png",
 			"specs": {
@@ -197,11 +194,11 @@
 					"Phoenix/Accueil-(2).jpg"
 				],
 				"whatIs": "The project emerged from the meeting of medical and tech professionals in an E-Health Challenge. We won the treatment award and decided to develop this product in order to launch our first user test in an important psychiatric hospital (Saint-Anne Hospital in Paris).",
-				"quote": "Designing a medical app is complex and leads to significant consequences (/has great impact?). The application has to be accessible and easily understandable in any situation, while quick to use and compliant with regulations."
+				"quote": "Designing a medical app is complex and leads to significant consequences. The application has to be accessible and easily understandable in any situation, while quick to use and compliant with regulations."
 			},
 			"chapeau": ".accessibility and minimalism",
 			"preMess":{
-				"text": "Simplicity and swiftness from opening the app to get the best strategy.",
+				"text": "Simplicity and swiftness to get the best strategy.",
 				"link": null,
 				"imgs": [
 					"Phoenix/SPLASHSCREEN.jpg",
@@ -311,7 +308,7 @@
 			"color": "white",
 			"square": "bottom",
 			"intro": {
-				"part1": "cocktail & flirt, ",
+				"part1": "cocktail & flirt,",
 				"part2": "what a perfect match"
 			},
 			"next": "reetags",

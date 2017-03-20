@@ -32,10 +32,13 @@ class Project extends Component {
 
   componentDidMount() {
     const {router, route} = this.props
+    const self = this
     if ( this.checkData() ){
       const index = this.getIndex()
       router.setRouteLeaveHook(route, this.routerWillLeave)
-      window.addEventListener('wheel', this.onScroll)
+      setTimeout(function() {
+        window.addEventListener('wheel', self.onScroll)
+      }, 1700)
       // this.setInitScroll(index)
     }
   }

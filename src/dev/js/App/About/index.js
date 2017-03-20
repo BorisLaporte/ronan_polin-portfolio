@@ -84,7 +84,7 @@ class About extends Component {
 						<div className="title">{title}</div>
 						<div className="links">
 							{ links.map(function(link, i){
-								return <a key={i} href={link.url}>{link.name}</a>
+								return <a target="_blank" key={i} href={link.url}>{link.name}</a>
 							})}
 						</div>
 					</div>
@@ -103,9 +103,8 @@ class About extends Component {
 							<a href={"mailto:"+details.mail}>{details.mail}</a>
 						</div>
 						<div className="super-awesome-dev">
-							{details.developedBy}
 							<a target="_blank" href={details.superAwesomeDev.url}>
-								{details.superAwesomeDev.name}
+								{details.developedBy}&nbsp;{details.superAwesomeDev.name}
 							</a>
 						</div>
 					</div>

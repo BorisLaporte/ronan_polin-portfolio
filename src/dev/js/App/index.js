@@ -7,6 +7,8 @@ import {setupRoutes} from './Store/navigation/actions'
 import {getWindowSize} from './Store/responsive/actions'
 import {setupTimers} from './Store/projectAnimation/actions'
 
+import './analytics'
+
 import Menu from './Menu'
 import json from 'SRC/data.json'
 

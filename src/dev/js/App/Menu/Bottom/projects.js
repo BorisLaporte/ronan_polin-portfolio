@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {withRouter} from 'react-router'
+import {withRouter, Link} from 'react-router'
 import {TimelineLite, Power2} from 'gsap'
 
 import ChineseNumber from './chinese_number'
@@ -76,7 +76,7 @@ class Projects extends Component {
     const toCompare = !forceActive ? name : forceActive
 		return (
 			<div className="link center" ref="container" >
-        <div className="label">.projects</div>
+        <Link to={prefix+projects[0]} className="label projects">.projects</Link>
         <div className="chinese-list">
           {projects.map(function(_project, i){
             const active = (toCompare == _project) ? 'active' : ''

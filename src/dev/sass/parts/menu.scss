@@ -1,4 +1,7 @@
 #menu{
+  .projects{
+    display: block;
+  }
   .about{
     .looking-for{
       position: absolute;
@@ -130,7 +133,6 @@
         margin-top: 8px;
         @media screen and (max-width: 1650px) {
           margin-top: 5px;
-          height: 2px;
         }
 
       }

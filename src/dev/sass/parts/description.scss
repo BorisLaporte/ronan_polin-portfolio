@@ -7,7 +7,7 @@
 	left: calc(50% - 10px);
 	transform: translateY(-50%);
 	background: white;
-	box-shadow: 0px 7px 13px 0 rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 3px 13px 0 rgba(0, 0, 0, 0.3);
 	@media screen and (max-width: 1200px) {
 		right: 50px;
 		left: initial;
@@ -23,7 +23,7 @@
 	.main{
 		position: relative;
 		display: inline-block;
-		padding: 20px 30px;
+		padding: 40px 30px;
 		text-align: center;
 
 		.part{
@@ -31,7 +31,6 @@
 			line-height: 1.5;
 			letter-spacing: 1.4px;
 			&.part-1{
-				margin-top: 20px;
 				margin-bottom: 10px;
 			}
 		}

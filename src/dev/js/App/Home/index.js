@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { withRouter } from 'react-router'
+import { withRouter} from 'react-router'
 import {connect} from 'react-redux'
 import {TweenLite, TimelineLite, Power2} from 'gsap'
 import {itWillPush, DID_PUSH} from 'APP/Store/navigation/actions'
@@ -10,10 +10,13 @@ class Home extends Component {
 
 		this.state = {
 			readyForNext: false,
+			isScrolling: false,
+			prefix: "/projects/",
 			tl: null
 		}
 
 		this.routerWillLeave = this.routerWillLeave.bind(this)
+		this.onScroll = this.onScroll.bind(this)
 	}
 
 	componentWillMount() {
@@ -23,6 +26,7 @@ class Home extends Component {
 	componentDidMount() {
 		const {route, router} = this.props
     router.setRouteLeaveHook(route, this.routerWillLeave)
+    window.addEventListener('wheel', this.onScroll)
     this.animationEnter()
   }
 
@@ -42,9 +46,28 @@ class Home extends Component {
 		}
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+		if ( this.props != nextProps || nextState.readyForNext ){
+			return true
+		}
+		return false
+  }
+
+  onScroll(e){
+    e.preventDefault()
+    const {deltaY} = e
+    const {isScrolling, prefix} = this.state
+    const {router, data} = this.props
+    if ( !isScrolling ){
+      if ( deltaY >= 30 || deltaY <= -30 ){
+				router.push(prefix+data.projects[0])
+				this.setState({isScrolling: true})
+      }
+    }
+  }
+
   componentWillUnmount() {
-		const {tl} = this.state
-		tl.clear()
+		window.removeEventListener('wheel', this.onScroll)
   }
 
   animationLeave(callback){
@@ -72,12 +95,12 @@ class Home extends Component {
 
   animationEnter(){
 		const {tl} = this.state
-		const {home, intro, content} = this.refs
+		const {home, intro, content, name} = this.refs
 		const body = new TweenLite.fromTo(home, 1,
 			{
 				opacity: 0
 			},
-			{	
+			{
 				opacity: 1,
 				ease: Power2.easeOut
 			})
@@ -106,7 +129,7 @@ class Home extends Component {
 		return (
 			<div id="home" className="sub-wrapper in-middle" ref="home" >
 				<div className="main center">
-					<div className="name shadowy">
+					<div className="name shadowy" ref="name">
 						<div className="first-name">{firstName}</div>
 						<div className="last-name">{lastName}</div>
 					</div>

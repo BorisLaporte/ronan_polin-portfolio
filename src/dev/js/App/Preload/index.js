@@ -70,19 +70,19 @@ export default class PreloadReact extends Component {
   }
 
   itsReady(){
-    // this.letsGo()
+    this.letsGo()
     console.log("It's already ready, but let's take our time :D")
   }
 
   leavingAnim(callback){
-    // callback()
-    const {tl} = this.state
-    tl.to(this.container, 1,
-    {
-      opacity:0,
-      ease: Power2.easeOut,
-      onComplete: callback
-    })
+    callback()
+    // const {tl} = this.state
+    // tl.to(this.container, 1,
+    // {
+    //   opacity:0,
+    //   ease: Power2.easeOut,
+    //   onComplete: callback
+    // })
   }
 
 

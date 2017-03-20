@@ -36,8 +36,10 @@ class BackBlur extends Component {
 		if ( type == "leaving" ){
 			if ( where == "projects" ){
 				this.switchAnim()
+			} else if ( where == "detail" ) {
+				this.leaveAnim(true)
 			} else {
-				this.leaveAnim()
+				this.leaveAnim(false)
 			}
 		} else if ( type == "entering" ){
 			this.enterAnim(true)
@@ -69,7 +71,6 @@ class BackBlur extends Component {
 	switchAnim(){
 		const {tl} = this.state
 		const {main} = this.refs
-		const {time, leavingDelay} = this.props.timers.backBlur
 		const tweenMain = new TweenLite.to(main, 0.6,
 			{
 				opacity:0,
@@ -79,26 +80,25 @@ class BackBlur extends Component {
 		tl.add([tweenMain], 1)
 	}
 
-	leaveAnim(){
+	leaveAnim(isDetail){
 		const {tl} = this.state
 		const {main, next} = this.refs
-		const {time, leavingDelay} = this.props.timers.backBlur
-
+		const delay = isDetail ? 0.4 : 1.3
 		tl.clear()
-		const tweenMain = new TweenLite.to(main, time,
+		const tweenMain = new TweenLite.to(main, 0.5,
 			{
 				opacity:0,
 				ease: Power2.easeOut
 			})
 		if ( next != null ){
-			const tweenNext = new TweenLite.to(next, time,
+			const tweenNext = new TweenLite.to(next, 0.5,
 				{
 					opacity:0,
 					ease: Power2.easeOut
 				})
-			tl.add([tweenMain, tweenNext], 0.4)
+			tl.add([tweenMain, tweenNext], delay)
 		} else {
-			tl.add([tweenMain], 0.4)
+			tl.add([tweenMain], delay)
 		}
 	}
 
