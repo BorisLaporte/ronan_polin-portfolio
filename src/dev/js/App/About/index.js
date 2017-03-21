@@ -92,7 +92,12 @@ class About extends Component {
 						<div className="hi">{details.hi}</div>
 						<div className="who-am-i">
 							{details.whoAmI} 
-							<a target="_blank" href={details.school.url} className="school">
+							<a 
+								target="_blank" 
+								title="école web, multimédia HETIC - Paris"  
+								href={details.school.url} 
+								className="school"
+							>
 							{details.school.name}
 							</a>
 							{details.doingWhat}

@@ -71,12 +71,12 @@
   .bottom{
     bottom: 0;
     position: absolute;
-    padding: 45px 100px;
+    padding: 0 100px 45px 100px;
     @media screen and (max-width: 1650px) {
-      padding: 25px 100px;
+      padding: 0 100px 25px 100px;
     }
     @media screen and (max-width: 900px) {
-      padding: 25px 30px;
+      padding: 0 30px 25px 30px;
     }
 
     .link{
