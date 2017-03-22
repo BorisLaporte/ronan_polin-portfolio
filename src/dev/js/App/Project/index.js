@@ -15,6 +15,7 @@ class Project extends Component {
       tl: null,
       index: 0,
       isScrolling: false,
+      scroll: null,
       readyForNext: false,
       nextName: null,
       timeout: null,
@@ -137,21 +138,24 @@ class Project extends Component {
   }
 
   scrollToNext(nextIndex){
-    const {data, timers} = this.props
-    const {prefix, scrollTime, scroll} = this.state
+    const {data} = this.props
+    const {prefix, scroll} = this.state
     const nextProject = data.projects[nextIndex]
     browserHistory.push(prefix+nextProject)
     this.setState({isScrolling: true})
     const self = this
-    clearTimeout(scroll)
-    this.state.scroll = setTimeout(function() {
+    if ( scroll != null ){
+      clearTimeout(scroll)
+    }
+    const newScroll = setTimeout(function() {
       self.setState({isScrolling: false})
     }, 800 )
+    this.setState({scroll: newScroll})
   }
 
   routerWillLeave(nextLocation) {
     const {readyForNext, reg, timeout} = this.state
-    const {dispatch, timers} = this.props
+    const {dispatch} = this.props
     const self = this
     if ( readyForNext ){
       this.setState({readyForNext: false})
@@ -161,18 +165,24 @@ class Project extends Component {
       const nextName = nextLocation.pathname.substring(nextLocation.pathname.lastIndexOf('/') + 1)
       this.setState({nextName: nextName})
       dispatch(itWillPush(nextLocation.pathname, "projects", direction))
-      clearTimeout(timeout)
-      this.state.timeout = setTimeout(function() {
+      if ( timeout != null ){
+        clearTimeout(timeout)
+      }
+      const newTimeout = setTimeout(function() {
         self.setAndGo(nextLocation.pathname)
       }, 1300)
+      this.setState({timeout: newTimeout})
       return false
     } else {
       dispatch(itWillPush(nextLocation.pathname, "projects"))
-      clearTimeout(timeout)
+      if ( timeout != null ){
+        clearTimeout(timeout)
+      }
       window.removeEventListener('wheel', this.onScroll)
-      this.state.timeout = setTimeout(function() {
+      const newTimeout = setTimeout(function() {
         self.setAndGo(nextLocation.pathname)
-      }, (1400))
+      }, 1400)
+      this.setState({timeout: newTimeout})
       return false
     }
   }
@@ -224,15 +234,10 @@ class Project extends Component {
 function mapStateToProps(state) {
   const { contentReducer} = state
   const { navigationReducer} = state
-  const { projectAnimationReducer} = state
 
   const {
     items: data
   } = contentReducer
-
-  const {
-    timers: timers
-  } = projectAnimationReducer
 
   const {
     route: reduxRoute,
@@ -246,8 +251,7 @@ function mapStateToProps(state) {
     reduxRoute,
     reduxNextRoute,
     isRouting,
-    nextRouteKind,
-    timers
+    nextRouteKind
   }
 }
 
